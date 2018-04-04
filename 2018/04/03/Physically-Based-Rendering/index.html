@@ -79,17 +79,17 @@
 
 
 
-<meta name="description" content="BRDF(双向反射分布方程)定义 $$f(l,v)=\frac{dL_{0}(v)}{dE(l)}$$ $$l:入射方向$$ $$v:观察方向$$ $$L_{0}(v):出射辐照率$$ $$E(l)：入射辐照度$$">
+<meta name="description" content="双向反射分布函数(Bidirectional Reflectance Distribution Function,BRDF)定义$$f(l,v)=\frac{dL_{0}(v)}{dE(l)}$$ $$l:入射方向$$ $$v:观察方向$$ $$L_{0}(v):出射辐照率$$ $$E(l)：入射辐照度$$ 高光反射项(specular term)微面元理论(microfacet theor">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Physically Based Rendering">
 <meta property="og:url" content="http://yoursite.com/2018/04/03/Physically-Based-Rendering/index.html">
 <meta property="og:site_name" content="Game Dev Lab">
-<meta property="og:description" content="BRDF(双向反射分布方程)定义 $$f(l,v)=\frac{dL_{0}(v)}{dE(l)}$$ $$l:入射方向$$ $$v:观察方向$$ $$L_{0}(v):出射辐照率$$ $$E(l)：入射辐照度$$">
+<meta property="og:description" content="双向反射分布函数(Bidirectional Reflectance Distribution Function,BRDF)定义$$f(l,v)=\frac{dL_{0}(v)}{dE(l)}$$ $$l:入射方向$$ $$v:观察方向$$ $$L_{0}(v):出射辐照率$$ $$E(l)：入射辐照度$$ 高光反射项(specular term)微面元理论(microfacet theor">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-04-03T15:55:15.672Z">
+<meta property="og:updated_time" content="2018-04-04T01:29:23.258Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Physically Based Rendering">
-<meta name="twitter:description" content="BRDF(双向反射分布方程)定义 $$f(l,v)=\frac{dL_{0}(v)}{dE(l)}$$ $$l:入射方向$$ $$v:观察方向$$ $$L_{0}(v):出射辐照率$$ $$E(l)：入射辐照度$$">
+<meta name="twitter:description" content="双向反射分布函数(Bidirectional Reflectance Distribution Function,BRDF)定义$$f(l,v)=\frac{dL_{0}(v)}{dE(l)}$$ $$l:入射方向$$ $$v:观察方向$$ $$L_{0}(v):出射辐照率$$ $$E(l)：入射辐照度$$ 高光反射项(specular term)微面元理论(microfacet theor">
 
 
 
@@ -301,12 +301,21 @@
       
         <script type="text/javascript" async src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML"> </script>
 
-<h3 id="BRDF-双向反射分布方程"><a href="#BRDF-双向反射分布方程" class="headerlink" title="BRDF(双向反射分布方程)"></a>BRDF(双向反射分布方程)</h3><p>定义</p>
-<p>$$<br>f(l,v)=\frac{dL_{0}(v)}{dE(l)}<br>$$</p>
+<h2 id="双向反射分布函数-Bidirectional-Reflectance-Distribution-Function-BRDF"><a href="#双向反射分布函数-Bidirectional-Reflectance-Distribution-Function-BRDF" class="headerlink" title="双向反射分布函数(Bidirectional Reflectance Distribution Function,BRDF)"></a>双向反射分布函数(Bidirectional Reflectance Distribution Function,BRDF)</h2><h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><p>$$<br>f(l,v)=\frac{dL_{0}(v)}{dE(l)}<br>$$</p>
 <p>$$<br>l:入射方向<br>$$</p>
 <p>$$<br>v:观察方向<br>$$</p>
 <p>$$<br>L_{0}(v):出射辐照率<br>$$</p>
 <p>$$<br>E(l)：入射辐照度<br>$$</p>
+<h3 id="高光反射项-specular-term"><a href="#高光反射项-specular-term" class="headerlink" title="高光反射项(specular term)"></a>高光反射项(specular term)</h3><h4 id="微面元理论-microfacet-theory"><a href="#微面元理论-microfacet-theory" class="headerlink" title="微面元理论(microfacet theory)"></a>微面元理论(microfacet theory)</h4><h4 id="Torrance-Sparrow-微面元模型"><a href="#Torrance-Sparrow-微面元模型" class="headerlink" title="Torrance-Sparrow 微面元模型"></a>Torrance-Sparrow 微面元模型</h4><p>$$<br>f_{spec}(l,v)=\frac{F(l,h)G(l,v,h)D(h)}{4(n\cdot l)(n\cdot v)}<br>$$</p>
+<h5 id="法线分布函数-normal-distribution-function-NDF"><a href="#法线分布函数-normal-distribution-function-NDF" class="headerlink" title="法线分布函数(normal distribution function, NDF)"></a>法线分布函数(normal distribution function, NDF)</h5><p>返回朝向h的微面元数占微面元总数的比例</p>
+<p>h:半角矢量(half-angle vector)</p>
+<p>$$<br>h=normalize(l+v)<br>$$</p>
+<h6 id="Blinn-Phone模型"><a href="#Blinn-Phone模型" class="headerlink" title="Blinn-Phone模型"></a>Blinn-Phone模型</h6><p>$$<br>D_{blinn}(h)=(n\cdot h)^{gloss}<br>$$</p>
+<h6 id="GGX"><a href="#GGX" class="headerlink" title="GGX"></a>GGX</h6><p>$$<br>D_{GGX}(h)=\frac{\alpha^{2}}{\pi((n\cdot h)^{2}(\alpha^{2}-1)+1)^{2}}<br>$$</p>
+<p>$$<br>\alpha=roughness^{2}<br>$$</p>
+<h3 id="漫反射项-diffuse-term"><a href="#漫反射项-diffuse-term" class="headerlink" title="漫反射项(diffuse term)"></a>漫反射项(diffuse term)</h3><h5 id="Lambert模型"><a href="#Lambert模型" class="headerlink" title="Lambert模型"></a>Lambert模型</h5><p>$$<br>f_{Lambert}(l,v)=\frac{c_{diff}}{\pi}<br>$$</p>
+<h5 id="Disney的漫反射项"><a href="#Disney的漫反射项" class="headerlink" title="Disney的漫反射项"></a>Disney的漫反射项</h5><p>$$<br>f_{diff}(l,v)=\frac{baseColor}{\pi}(1+(F_{D90}-1)(1-n\cdot l)^{5})(1+(F_{D90}-1)(1-n\cdot v)^5)<br>$$</p>
+<p>$$<br>F_{D90}=0.5+2roughness(h\cdot l)^{2}<br>$$</p>
 
       
     </div>
@@ -453,7 +462,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#BRDF-双向反射分布方程"><span class="nav-number">1.</span> <span class="nav-text">BRDF(双向反射分布方程)</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#双向反射分布函数-Bidirectional-Reflectance-Distribution-Function-BRDF"><span class="nav-number">1.</span> <span class="nav-text">双向反射分布函数(Bidirectional Reflectance Distribution Function,BRDF)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#定义"><span class="nav-number">1.1.</span> <span class="nav-text">定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#高光反射项-specular-term"><span class="nav-number">1.2.</span> <span class="nav-text">高光反射项(specular term)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#微面元理论-microfacet-theory"><span class="nav-number">1.2.1.</span> <span class="nav-text">微面元理论(microfacet theory)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Torrance-Sparrow-微面元模型"><span class="nav-number">1.2.2.</span> <span class="nav-text">Torrance-Sparrow 微面元模型</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#法线分布函数-normal-distribution-function-NDF"><span class="nav-number">1.2.2.1.</span> <span class="nav-text">法线分布函数(normal distribution function, NDF)</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#Blinn-Phone模型"><span class="nav-number">1.2.2.1.1.</span> <span class="nav-text">Blinn-Phone模型</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#GGX"><span class="nav-number">1.2.2.1.2.</span> <span class="nav-text">GGX</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#漫反射项-diffuse-term"><span class="nav-number">1.3.</span> <span class="nav-text">漫反射项(diffuse term)</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Lambert模型"><span class="nav-number">1.3.0.1.</span> <span class="nav-text">Lambert模型</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Disney的漫反射项"><span class="nav-number">1.3.0.2.</span> <span class="nav-text">Disney的漫反射项</span></a></li></ol></li></ol></li></ol></li></ol></div>
             
 
           </div>
