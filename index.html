@@ -317,6 +317,9 @@
 <h6 id="Blinn-Phone模型"><a href="#Blinn-Phone模型" class="headerlink" title="Blinn-Phone模型"></a>Blinn-Phone模型</h6><p>$$<br>D_{blinn}(h)=(n\cdot h)^{gloss}<br>$$</p>
 <h6 id="GGX"><a href="#GGX" class="headerlink" title="GGX"></a>GGX</h6><p>$$<br>D_{GGX}(h)=\frac{\alpha^{2}}{\pi((n\cdot h)^{2}(\alpha^{2}-1)+1)^{2}}<br>$$</p>
 <p>$$<br>\alpha=roughness^{2}<br>$$</p>
+<h5 id="阴影-遮罩函数-shadow-masking-function"><a href="#阴影-遮罩函数-shadow-masking-function" class="headerlink" title="阴影-遮罩函数(shadow-masking function)"></a>阴影-遮罩函数(shadow-masking function)</h5><h6 id="Smith-Schlick模型"><a href="#Smith-Schlick模型" class="headerlink" title="Smith-Schlick模型"></a>Smith-Schlick模型</h6><p>$$<br>G(l,v,h)=\frac{1}{((n\cdot l)(1-k)+k)((n\cdot v)(1-k)+k)}<br>$$</p>
+<p>$$<br>k=\frac{roughness^{2}}{2}<br>$$</p>
+<h5 id="菲涅尔反射函数"><a href="#菲涅尔反射函数" class="headerlink" title="菲涅尔反射函数"></a>菲涅尔反射函数</h5><h6 id="Schlick-菲涅尔近似等式"><a href="#Schlick-菲涅尔近似等式" class="headerlink" title="Schlick 菲涅尔近似等式"></a>Schlick 菲涅尔近似等式</h6><p>$$<br>F(l,h)=F_{0}+(1-F_{0})(1-l\cdot h)^{5}<br>$$</p>
 <h3 id="漫反射项-diffuse-term"><a href="#漫反射项-diffuse-term" class="headerlink" title="漫反射项(diffuse term)"></a>漫反射项(diffuse term)</h3><h5 id="Lambert模型"><a href="#Lambert模型" class="headerlink" title="Lambert模型"></a>Lambert模型</h5><p>$$<br>f_{Lambert}(l,v)=\frac{c_{diff}}{\pi}<br>$$</p>
 <h5 id="Disney的漫反射项"><a href="#Disney的漫反射项" class="headerlink" title="Disney的漫反射项"></a>Disney的漫反射项</h5><p>$$<br>f_{diff}(l,v)=\frac{baseColor}{\pi}(1+(F_{D90}-1)(1-n\cdot l)^{5})(1+(F_{D90}-1)(1-n\cdot v)^5)<br>$$</p>
 <p>$$<br>F_{D90}=0.5+2roughness(h\cdot l)^{2}<br>$$</p>
