@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="定义双向反射分布函数(Bidirectional Reflectance Distribution Function,BRDF) $$f(l,v)=\frac{dL_{0}(v)}{dE(l)}$$ $$l:入射方向$$ $$v:观察方向$$ $$L_{0}(v):出射辐照率$$ $$E(l)：入射辐照度$$ 高光反射项(specular term)微面元理论(microfacet theo">
+<meta name="description" content="定义双向反射分布函数(Bidirectional Reflectance Distribution Function,BRDF)出射辐照率的微分(differential outgoing radiance)和入射辐照度的微分(differential incoming irradiance)之比用于描述光如何从给定的两个方向(入射方向l和出射方向v)在表面进行反射 定义式$$f(l,v)=">
 <meta name="keywords" content="ComputerGraphics,PBR">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Bidirectional Reflectance Distribution Function">
 <meta property="og:url" content="http://yoursite.com/2018/04/15/BRDF/index.html">
 <meta property="og:site_name" content="Game Dev Lab">
-<meta property="og:description" content="定义双向反射分布函数(Bidirectional Reflectance Distribution Function,BRDF) $$f(l,v)=\frac{dL_{0}(v)}{dE(l)}$$ $$l:入射方向$$ $$v:观察方向$$ $$L_{0}(v):出射辐照率$$ $$E(l)：入射辐照度$$ 高光反射项(specular term)微面元理论(microfacet theo">
+<meta property="og:description" content="定义双向反射分布函数(Bidirectional Reflectance Distribution Function,BRDF)出射辐照率的微分(differential outgoing radiance)和入射辐照度的微分(differential incoming irradiance)之比用于描述光如何从给定的两个方向(入射方向l和出射方向v)在表面进行反射 定义式$$f(l,v)=">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-04-15T07:53:39.795Z">
+<meta property="og:updated_time" content="2018-04-15T08:33:51.581Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Bidirectional Reflectance Distribution Function">
-<meta name="twitter:description" content="定义双向反射分布函数(Bidirectional Reflectance Distribution Function,BRDF) $$f(l,v)=\frac{dL_{0}(v)}{dE(l)}$$ $$l:入射方向$$ $$v:观察方向$$ $$L_{0}(v):出射辐照率$$ $$E(l)：入射辐照度$$ 高光反射项(specular term)微面元理论(microfacet theo">
+<meta name="twitter:description" content="定义双向反射分布函数(Bidirectional Reflectance Distribution Function,BRDF)出射辐照率的微分(differential outgoing radiance)和入射辐照度的微分(differential incoming irradiance)之比用于描述光如何从给定的两个方向(入射方向l和出射方向v)在表面进行反射 定义式$$f(l,v)=">
 
 
 
@@ -302,18 +302,21 @@
       
         <script type="text/javascript" async src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML"> </script>
 
-<h1 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h1><p>双向反射分布函数(Bidirectional Reflectance Distribution Function,BRDF)</p>
-<p>$$<br>f(l,v)=\frac{dL_{0}(v)}{dE(l)}<br>$$</p>
-<p>$$<br>l:入射方向<br>$$</p>
-<p>$$<br>v:观察方向<br>$$</p>
-<p>$$<br>L_{0}(v):出射辐照率<br>$$</p>
-<p>$$<br>E(l)：入射辐照度<br>$$</p>
+<h1 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h1><p>双向反射分布函数(Bidirectional Reflectance Distribution Function,BRDF)<br>出射辐照率的微分(differential outgoing radiance)和入射辐照度的微分(differential incoming irradiance)之比<br>用于描述光如何从给定的两个方向(入射方向l和出射方向v)在表面进行反射</p>
+<h2 id="定义式"><a href="#定义式" class="headerlink" title="定义式"></a>定义式</h2><p>$$<br>f(l,v)=\frac{dL_{0}(v)}{dE(l)}<br>$$</p>
+<h2 id="非微分形式"><a href="#非微分形式" class="headerlink" title="非微分形式"></a>非微分形式</h2><p>仅限于非区域光源(点光源、方向光源)</p>
+<p>$$<br>f(l,v)=\frac{L_{0}(v)}{E(l)\overline{cos}\theta_{i}}<br>$$</p>
+<p>L(v)是视图矢量v方向上产生的出射辐照率(radiance)<br>E(l)是光源在垂直于光的方向向量L平面测得的辐照度(irradiance)</p>
+<h2 id="着色方程"><a href="#着色方程" class="headerlink" title="着色方程"></a>着色方程</h2><p>$$<br>L_{0}(v)=\sum_{k=1}^{n}f(l_{k},v)\bigotimes E_{L_{k}}cos\theta_{i_{k}}<br>$$</p>
+<p>k:光源索引</p>
 <h1 id="高光反射项-specular-term"><a href="#高光反射项-specular-term" class="headerlink" title="高光反射项(specular term)"></a>高光反射项(specular term)</h1><h2 id="微面元理论-microfacet-theory"><a href="#微面元理论-microfacet-theory" class="headerlink" title="微面元理论(microfacet theory)"></a>微面元理论(microfacet theory)</h2><p>微面元理论认为物体表面是由很多的微面元组成的，并且认为这些微面元是光学平滑的，有完美的高光反射。<br>不同的微面元会把同一入射方向的光反射到不同的方向上，即只有一部分微面元反射的光线进入摄像机，这部分微面元的法线m恰好为入射方向和观察方向的一半，即半角矢量h(half-angle vector)</p>
 <h2 id="Torrance-Sparrow-微面元模型"><a href="#Torrance-Sparrow-微面元模型" class="headerlink" title="Torrance-Sparrow 微面元模型"></a>Torrance-Sparrow 微面元模型</h2><p>$$<br>f_{spec}(l,v)=\frac{F(l,h)G(l,v,h)D(h)}{4(n\cdot l)(n\cdot v)}<br>$$</p>
-<h2 id="法线分布函数-normal-distribution-function-NDF"><a href="#法线分布函数-normal-distribution-function-NDF" class="headerlink" title="法线分布函数(normal distribution function, NDF)"></a>法线分布函数(normal distribution function, NDF)</h2><p>返回朝向h的微面元数占微面元总数的比例</p>
-<p>h:半角矢量(half-angle vector)</p>
+<h2 id="法线分布函数-normal-distribution-function-NDF"><a href="#法线分布函数-normal-distribution-function-NDF" class="headerlink" title="法线分布函数(normal distribution function, NDF)"></a>法线分布函数(normal distribution function, NDF)</h2><p>描述组成表面一点的所有微面元的法线分布概率，输入朝向h，返回朝向是h的微面元数占微面元总数的比例</p>
 <p>$$<br>h=normalize(l+v)<br>$$</p>
-<h3 id="Blinn-Phone模型"><a href="#Blinn-Phone模型" class="headerlink" title="Blinn-Phone模型"></a>Blinn-Phone模型</h3><p>$$<br>D_{blinn}(h)=(n\cdot h)^{gloss}<br>$$</p>
+<h3 id="Phong模型"><a href="#Phong模型" class="headerlink" title="Phong模型"></a>Phong模型</h3><p>$$<br>D_{Phong}(h)=(v\cdot r)^{gloss}<br>$$</p>
+<p>$$<br>gloss:光泽度<br>$$</p>
+<p>$$<br>r=2(n\cdot l)n-l (反射方向)<br>$$</p>
+<h3 id="Blinn-Phong模型"><a href="#Blinn-Phong模型" class="headerlink" title="Blinn-Phong模型"></a>Blinn-Phong模型</h3><p>$$<br>D_{blinn}(h)=(n\cdot h)^{gloss}<br>$$</p>
 <h3 id="GGX"><a href="#GGX" class="headerlink" title="GGX"></a>GGX</h3><p>$$<br>D_{GGX}(h)=\frac{\alpha^{2}}{\pi((n\cdot h)^{2}(\alpha^{2}-1)+1)^{2}}<br>$$</p>
 <p>$$<br>\alpha=roughness^{2}<br>$$</p>
 <h2 id="阴影-遮罩函数-shadow-masking-function"><a href="#阴影-遮罩函数-shadow-masking-function" class="headerlink" title="阴影-遮罩函数(shadow-masking function)"></a>阴影-遮罩函数(shadow-masking function)</h2><h3 id="Smith-Schlick模型"><a href="#Smith-Schlick模型" class="headerlink" title="Smith-Schlick模型"></a>Smith-Schlick模型</h3><p>$$<br>G(l,v,h)=\frac{1}{((n\cdot l)(1-k)+k)((n\cdot v)(1-k)+k)}<br>$$</p>
@@ -471,7 +474,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#定义"><span class="nav-number">1.</span> <span class="nav-text">定义</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#高光反射项-specular-term"><span class="nav-number">2.</span> <span class="nav-text">高光反射项(specular term)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#微面元理论-microfacet-theory"><span class="nav-number">2.1.</span> <span class="nav-text">微面元理论(microfacet theory)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Torrance-Sparrow-微面元模型"><span class="nav-number">2.2.</span> <span class="nav-text">Torrance-Sparrow 微面元模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#法线分布函数-normal-distribution-function-NDF"><span class="nav-number">2.3.</span> <span class="nav-text">法线分布函数(normal distribution function, NDF)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Blinn-Phone模型"><span class="nav-number">2.3.1.</span> <span class="nav-text">Blinn-Phone模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#GGX"><span class="nav-number">2.3.2.</span> <span class="nav-text">GGX</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#阴影-遮罩函数-shadow-masking-function"><span class="nav-number">2.4.</span> <span class="nav-text">阴影-遮罩函数(shadow-masking function)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Smith-Schlick模型"><span class="nav-number">2.4.1.</span> <span class="nav-text">Smith-Schlick模型</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#菲涅尔反射函数-Fresnel-reflectance"><span class="nav-number">2.5.</span> <span class="nav-text">菲涅尔反射函数(Fresnel reflectance)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Schlick-菲涅尔近似等式"><span class="nav-number">2.5.1.</span> <span class="nav-text">Schlick 菲涅尔近似等式</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#漫反射项-diffuse-term"><span class="nav-number">3.</span> <span class="nav-text">漫反射项(diffuse term)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Lambert模型"><span class="nav-number">3.1.</span> <span class="nav-text">Lambert模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Disney的漫反射模型"><span class="nav-number">3.2.</span> <span class="nav-text">Disney的漫反射模型</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#定义"><span class="nav-number">1.</span> <span class="nav-text">定义</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#定义式"><span class="nav-number">1.1.</span> <span class="nav-text">定义式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#非微分形式"><span class="nav-number">1.2.</span> <span class="nav-text">非微分形式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#着色方程"><span class="nav-number">1.3.</span> <span class="nav-text">着色方程</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#高光反射项-specular-term"><span class="nav-number">2.</span> <span class="nav-text">高光反射项(specular term)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#微面元理论-microfacet-theory"><span class="nav-number">2.1.</span> <span class="nav-text">微面元理论(microfacet theory)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Torrance-Sparrow-微面元模型"><span class="nav-number">2.2.</span> <span class="nav-text">Torrance-Sparrow 微面元模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#法线分布函数-normal-distribution-function-NDF"><span class="nav-number">2.3.</span> <span class="nav-text">法线分布函数(normal distribution function, NDF)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Phong模型"><span class="nav-number">2.3.1.</span> <span class="nav-text">Phong模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Blinn-Phong模型"><span class="nav-number">2.3.2.</span> <span class="nav-text">Blinn-Phong模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#GGX"><span class="nav-number">2.3.3.</span> <span class="nav-text">GGX</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#阴影-遮罩函数-shadow-masking-function"><span class="nav-number">2.4.</span> <span class="nav-text">阴影-遮罩函数(shadow-masking function)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Smith-Schlick模型"><span class="nav-number">2.4.1.</span> <span class="nav-text">Smith-Schlick模型</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#菲涅尔反射函数-Fresnel-reflectance"><span class="nav-number">2.5.</span> <span class="nav-text">菲涅尔反射函数(Fresnel reflectance)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Schlick-菲涅尔近似等式"><span class="nav-number">2.5.1.</span> <span class="nav-text">Schlick 菲涅尔近似等式</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#漫反射项-diffuse-term"><span class="nav-number">3.</span> <span class="nav-text">漫反射项(diffuse term)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Lambert模型"><span class="nav-number">3.1.</span> <span class="nav-text">Lambert模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Disney的漫反射模型"><span class="nav-number">3.2.</span> <span class="nav-text">Disney的漫反射模型</span></a></li></ol></li></ol></div>
             
 
           </div>
