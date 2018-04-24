@@ -79,24 +79,22 @@
 
 
 
-<meta name="description" content="Cel ShadingCel Shading(Toon Shading)是非真实感渲染中非常重要的一部分，用于模拟日本动画中的赛璐璐风格。这种风格的特点是没有渐变色，而是用明确的亮暗面分界来概括光照效果。  实现相对于逼真的物理渲染，人对于卡通渲染会更宽容，因此这里不需要进行环境光、次表面散射等复杂的光照计算。只需要用简单的漫反射+降低色阶就可以达到不错的效果。   《塞尔达传说：荒野之息》">
+<meta name="description" content="Cel ShadingCel Shading(Toon Shading)是非真实感渲染中非常重要的一部分，用于模拟日本动画中的赛璐璐(Celluloid)风格。这种风格的特点是没有渐变色，而是用明确的亮暗面分界来概括光照效果。  实现一般的PBR模型经过简单的色调映射就可以实现Cel Shading的效果。相对于真实感渲染，玩家对于卡通渲染会更宽容一些，因此这里不需要完整的BRDF模型，环境">
 <meta property="og:type" content="article">
-<meta property="og:title" content="CelShading">
+<meta property="og:title" content="Cel Shading">
 <meta property="og:url" content="http://yoursite.com/2018/04/24/CelShading/index.html">
 <meta property="og:site_name" content="Game Dev Lab">
-<meta property="og:description" content="Cel ShadingCel Shading(Toon Shading)是非真实感渲染中非常重要的一部分，用于模拟日本动画中的赛璐璐风格。这种风格的特点是没有渐变色，而是用明确的亮暗面分界来概括光照效果。  实现相对于逼真的物理渲染，人对于卡通渲染会更宽容，因此这里不需要进行环境光、次表面散射等复杂的光照计算。只需要用简单的漫反射+降低色阶就可以达到不错的效果。   《塞尔达传说：荒野之息》">
+<meta property="og:description" content="Cel ShadingCel Shading(Toon Shading)是非真实感渲染中非常重要的一部分，用于模拟日本动画中的赛璐璐(Celluloid)风格。这种风格的特点是没有渐变色，而是用明确的亮暗面分界来概括光照效果。  实现一般的PBR模型经过简单的色调映射就可以实现Cel Shading的效果。相对于真实感渲染，玩家对于卡通渲染会更宽容一些，因此这里不需要完整的BRDF模型，环境">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/2018/04/24/CelShading/ToonShading.jpg">
-<meta property="og:image" content="http://yoursite.com/2018/04/24/CelShading/Link_Diffuse_Lambert.PNG">
-<meta property="og:image" content="http://yoursite.com/2018/04/24/CelShading/Link_Graded_Diffuse_Lambert.PNG">
+<meta property="og:image" content="http://yoursite.com/2018/04/24/CelShading/Link_Diffuse.PNG">
 <meta property="og:image" content="http://yoursite.com/2018/04/24/CelShading/Zelda_01.jpg">
-<meta property="og:image" content="http://yoursite.com/2018/04/24/CelShading/Link_Fresnel.PNG">
-<meta property="og:image" content="http://yoursite.com/2018/04/24/CelShading/Link_Graded_Fresnel.PNG">
+<meta property="og:image" content="http://yoursite.com/2018/04/24/CelShading/Link_Fresnel.png">
 <meta property="og:image" content="http://yoursite.com/2018/04/24/CelShading/Link_Final.PNG">
-<meta property="og:updated_time" content="2018-04-24T14:28:26.453Z">
+<meta property="og:updated_time" content="2018-04-24T16:48:10.443Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="CelShading">
-<meta name="twitter:description" content="Cel ShadingCel Shading(Toon Shading)是非真实感渲染中非常重要的一部分，用于模拟日本动画中的赛璐璐风格。这种风格的特点是没有渐变色，而是用明确的亮暗面分界来概括光照效果。  实现相对于逼真的物理渲染，人对于卡通渲染会更宽容，因此这里不需要进行环境光、次表面散射等复杂的光照计算。只需要用简单的漫反射+降低色阶就可以达到不错的效果。   《塞尔达传说：荒野之息》">
+<meta name="twitter:title" content="Cel Shading">
+<meta name="twitter:description" content="Cel ShadingCel Shading(Toon Shading)是非真实感渲染中非常重要的一部分，用于模拟日本动画中的赛璐璐(Celluloid)风格。这种风格的特点是没有渐变色，而是用明确的亮暗面分界来概括光照效果。  实现一般的PBR模型经过简单的色调映射就可以实现Cel Shading的效果。相对于真实感渲染，玩家对于卡通渲染会更宽容一些，因此这里不需要完整的BRDF模型，环境">
 <meta name="twitter:image" content="http://yoursite.com/2018/04/24/CelShading/ToonShading.jpg">
 
 
@@ -133,7 +131,7 @@
 
 
 
-  <title>CelShading | Game Dev Lab</title>
+  <title>Cel Shading | Game Dev Lab</title>
   
 
 
@@ -257,7 +255,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">CelShading</h1>
+          <h1 class="post-title" itemprop="name headline">Cel Shading</h1>
         
 
         <div class="post-meta">
@@ -309,18 +307,22 @@
       
         <script type="text/javascript" async src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML"> </script>
 
-<h1 id="Cel-Shading"><a href="#Cel-Shading" class="headerlink" title="Cel Shading"></a>Cel Shading</h1><p><em>Cel Shading(Toon Shading</em>)是非真实感渲染中非常重要的一部分，用于模拟日本动画中的赛璐璐风格。这种风格的特点是没有渐变色，而是用明确的亮暗面分界来概括光照效果。</p>
-<p><img src="/2018/04/24/CelShading/ToonShading.jpg" alt="Toon Shading"></p>
-<h1 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h1><p>相对于逼真的物理渲染，人对于卡通渲染会更宽容，因此这里不需要进行环境光、次表面散射等复杂的光照计算。只需要用简单的漫反射+降低色阶就可以达到不错的效果。</p>
-<p><img src="/2018/04/24/CelShading/Link_Diffuse_Lambert.PNG" alt="Lambert漫反射模型"> <img src="/2018/04/24/CelShading/Link_Graded_Diffuse_Lambert.PNG" alt="降色阶"></p>
-<h2 id="《塞尔达传说：荒野之息》的风格"><a href="#《塞尔达传说：荒野之息》的风格" class="headerlink" title="《塞尔达传说：荒野之息》的风格"></a>《塞尔达传说：荒野之息》的风格</h2><p><img src="/2018/04/24/CelShading/Zelda_01.jpg" alt=""></p>
-<p>《BOTW》在亮暗双色的基础上加入了第三层”高光”，这里的高光和BRDF里的specular不同，而是类似菲涅尔反射的光照效果。这层”高光”只存在于物体的边缘，即光照方向和观察方向几乎与法线垂直的情况，一般在布料和毛发上比较明显。Disney的BRDF模型[1]里也有对于这种效果的计算。</p>
-<p>这里用Schlick近似等式[2]来计算，然后同样把计算结果进行一次降低色阶的映射</p>
-<p>$$<br>F_{Schlick}(v,n)=F_{0}+(1-F_{0})(n\cdot v)^{5}<br>$$</p>
-<p><img src="/2018/04/24/CelShading/Link_Fresnel.PNG" alt="菲涅尔反射"> <img src="/2018/04/24/CelShading/Link_Graded_Fresnel.PNG" alt="降色阶"></p>
+<h1 id="Cel-Shading"><a href="#Cel-Shading" class="headerlink" title="Cel Shading"></a>Cel Shading</h1><p><em>Cel Shading(Toon Shading)</em>是非真实感渲染中非常重要的一部分，用于模拟日本动画中的赛璐璐(Celluloid)风格。这种风格的特点是没有渐变色，而是用明确的亮暗面分界来概括光照效果。</p>
+<p><img src="/2018/04/24/CelShading/ToonShading.jpg"></p>
+<h1 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h1><p>一般的PBR模型经过简单的色调映射就可以实现Cel Shading的效果。相对于真实感渲染，玩家对于卡通渲染会更宽容一些，因此这里不需要完整的BRDF模型，环境光、次表面散射等复杂的光照计算都可以省略，一般只计算漫反射、高光反射和菲涅尔反射。</p>
+<p>只计算最简单的漫反射+色调映射就可以达到不错的效果。</p>
+<p><img src="/2018/04/24/CelShading/Link_Diffuse.PNG" style="zoom:50%"></p>
+<p>下面结合具体的案例来分析Cel Shading的实践应用</p>
+<h2 id="《塞尔达传说：荒野之息》"><a href="#《塞尔达传说：荒野之息》" class="headerlink" title="《塞尔达传说：荒野之息》"></a>《塞尔达传说：荒野之息》</h2><p>《BOTW》的美术风格很有意思，人物和环境是两个画风，人物是典型的Cel Shading，环境更接近油画的风格。制作人想让这个游戏看起来有日本动画片(Anime)的风格，又希望对于荒野的描绘有外光派(Plein-Air)的感觉。<em>（这两种画风放在一起竟然完全没有割裂感orz）</em></p>
+<p><img src="/2018/04/24/CelShading/Zelda_01.jpg"></p>
+<p>环境部分的坑有空再开，这里主要分析人物的渲染。</p>
+<p>《BOTW》在亮暗双色的基础上加入了第三层光照，有点类似菲涅尔反射的效果，即用更亮的颜色来填充那些观察方向几乎与法线垂直的地方，这种效果一般在布料和毛发上比较明显。Disney的BRDF模型<sup>[1]</sup>里也有对于这种效果的计算。</p>
+<p>这里用Schlick近似等式<sup>[2]</sup>来计算，然后同样把计算结果进行一次色调映射</p>
+<p>$$<br>F_{Schlick}(\theta)=F_{0}+(1-F_{0})(cos\theta)^{5}<br>$$</p>
+<p><img src="/2018/04/24/CelShading/Link_Fresnel.png" style="zoom:50%"></p>
 <p>最终效果</p>
-<p><img src="/2018/04/24/CelShading/Link_Final.PNG" alt="最终效果"></p>
-<h1 id="References"><a href="#References" class="headerlink" title="References"></a>References</h1><p>[1]B Burley Physically-based shading at disney - 2012<br>[2]Schlick, C. (1994). “An Inexpensive BRDF Model for Physically-based Rendering”. Computer Graphics Forum. 13 (3): 233. doi:10.1111/1467-8659.1330233.</p>
+<p><img src="/2018/04/24/CelShading/Link_Final.PNG" style="zoom:50%"></p>
+<h1 id="References"><a href="#References" class="headerlink" title="References"></a>References</h1><p>[1]B Burley Physically-based shading at disney - 2012<br>[2]Schlick, C. (1994). “An Inexpensive BRDF Model for Physically-based Rendering”. </p>
 
       
     </div>
@@ -476,7 +478,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Cel-Shading"><span class="nav-number">1.</span> <span class="nav-text">Cel Shading</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#实现"><span class="nav-number">2.</span> <span class="nav-text">实现</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#《塞尔达传说：荒野之息》的风格"><span class="nav-number">2.1.</span> <span class="nav-text">《塞尔达传说：荒野之息》的风格</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#References"><span class="nav-number">3.</span> <span class="nav-text">References</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Cel-Shading"><span class="nav-number">1.</span> <span class="nav-text">Cel Shading</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#实现"><span class="nav-number">2.</span> <span class="nav-text">实现</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#《塞尔达传说：荒野之息》"><span class="nav-number">2.1.</span> <span class="nav-text">《塞尔达传说：荒野之息》</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#References"><span class="nav-number">3.</span> <span class="nav-text">References</span></a></li></ol></div>
             
 
           </div>
