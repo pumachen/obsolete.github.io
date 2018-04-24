@@ -79,16 +79,24 @@
 
 
 
-<meta name="description" content="techniques about game develop and computer graphics">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Game Dev Lab">
-<meta property="og:url" content="http://yoursite.com/index.html">
+<meta name="description" content="Cel ShadingCel Shading(Toon Shading)是非真实感渲染中非常重要的一部分，用于模拟日本动画中的赛璐璐风格。这种风格的特点是没有渐变色，而是用明确的亮暗面分界来概括光照效果。 实现相对于逼真的物理渲染，人对于卡通渲染会更宽容一点，因此这里不需要进行环境光、镜面反射等复杂的光照计算。只需要用简单的漫反射+降低色阶就可以达到不错的效果。   ##《塞尔达传说：荒野之">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CelShading">
+<meta property="og:url" content="http://yoursite.com/2018/04/24/CelShading/index.html">
 <meta property="og:site_name" content="Game Dev Lab">
-<meta property="og:description" content="techniques about game develop and computer graphics">
+<meta property="og:description" content="Cel ShadingCel Shading(Toon Shading)是非真实感渲染中非常重要的一部分，用于模拟日本动画中的赛璐璐风格。这种风格的特点是没有渐变色，而是用明确的亮暗面分界来概括光照效果。 实现相对于逼真的物理渲染，人对于卡通渲染会更宽容一点，因此这里不需要进行环境光、镜面反射等复杂的光照计算。只需要用简单的漫反射+降低色阶就可以达到不错的效果。   ##《塞尔达传说：荒野之">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2018/04/24/CelShading/Zelda_01.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/04/24/CelShading/Zelda_Diffuse_Lambert.PNG">
+<meta property="og:image" content="http://yoursite.com/2018/04/24/CelShading/Zelda_Graded_Diffuse_Lambert.PNG">
+<meta property="og:image" content="http://yoursite.com/2018/04/24/CelShading/Zelda_Fresnel.PNG">
+<meta property="og:image" content="http://yoursite.com/2018/04/24/CelShading/Zelda_Graded_Fresnel.PNG">
+<meta property="og:image" content="http://yoursite.com/2018/04/24/CelShading/Zelda_Final.PNG">
+<meta property="og:updated_time" content="2018-04-24T13:09:02.632Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Game Dev Lab">
-<meta name="twitter:description" content="techniques about game develop and computer graphics">
+<meta name="twitter:title" content="CelShading">
+<meta name="twitter:description" content="Cel ShadingCel Shading(Toon Shading)是非真实感渲染中非常重要的一部分，用于模拟日本动画中的赛璐璐风格。这种风格的特点是没有渐变色，而是用明确的亮暗面分界来概括光照效果。 实现相对于逼真的物理渲染，人对于卡通渲染会更宽容一点，因此这里不需要进行环境光、镜面反射等复杂的光照计算。只需要用简单的漫反射+降低色阶就可以达到不错的效果。   ##《塞尔达传说：荒野之">
+<meta name="twitter:image" content="http://yoursite.com/2018/04/24/CelShading/Zelda_01.jpg">
 
 
 
@@ -118,13 +126,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/04/24/CelShading/"/>
 
 
 
 
 
-  <title>Game Dev Lab</title>
+  <title>CelShading | Game Dev Lab</title>
   
 
 
@@ -143,8 +151,7 @@
     
   
 
-  <div class="container sidebar-position-left 
-  page-home">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -217,9 +224,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
 
@@ -249,9 +256,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/04/24/CelShading/" itemprop="url">CelShading</a></h1>
+          <h1 class="post-title" itemprop="name headline">CelShading</h1>
         
 
         <div class="post-meta">
@@ -301,9 +306,7 @@
       
 
       
-        
-          
-            <script type="text/javascript" async src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML"> </script>
+        <script type="text/javascript" async src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML"> </script>
 
 <h1 id="Cel-Shading"><a href="#Cel-Shading" class="headerlink" title="Cel Shading"></a>Cel Shading</h1><p><em>Cel Shading</em>(<em>Toon Shading</em>)是非真实感渲染中非常重要的一部分，用于模拟日本动画中的赛璐璐风格。这种风格的特点是没有渐变色，而是用明确的亮暗面分界来概括光照效果。<br><img src="/2018/04/24/CelShading/Zelda_01.jpg" alt=""></p>
 <h1 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h1><p>相对于逼真的物理渲染，人对于卡通渲染会更宽容一点，因此这里不需要进行环境光、镜面反射等复杂的光照计算。只需要用简单的漫反射+降低色阶就可以达到不错的效果。</p>
@@ -316,8 +319,6 @@
 <p><img src="/2018/04/24/CelShading/Zelda_Final.PNG" alt="最终效果"></p>
 <h1 id="References"><a href="#References" class="headerlink" title="References"></a>References</h1><p>[1]B Burley Physically-based shading at disney - 2012<br>[2]Schlick, C. (1994). “An Inexpensive BRDF Model for Physically-based Rendering”. Computer Graphics Forum. 13 (3): 233. doi:10.1111/1467-8659.1330233.</p>
 
-          
-        
       
     </div>
     
@@ -334,182 +335,28 @@
       
 
       
-
-      
-
       
       
-        <div class="post-eof"></div>
+
       
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/15/BRDF/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Puma Chen">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Game Dev Lab">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/04/15/BRDF/" itemprop="url">Bidirectional Reflectance Distribution Function</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
             
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-15T15:53:21+08:00">
-                2018-04-15
-              </time>
+              <a href="/2018/04/15/BRDF/" rel="next" title="Bidirectional Reflectance Distribution Function">
+                <i class="fa fa-chevron-left"></i> Bidirectional Reflectance Distribution Function
+              </a>
             
+          </div>
 
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
             
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
+          </div>
         </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
       
 
       
-        
-          
-            <script type="text/javascript" async src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML"> </script>
-
-<h1 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h1><p>双向反射分布函数(Bidirectional Reflectance Distribution Function,BRDF)<br>出射辐照率的微分(differential outgoing radiance)和入射辐照度的微分(differential incoming irradiance)之比<br>用于描述光如何从给定的两个方向(入射方向l和出射方向v)在表面进行反射</p>
-<h2 id="定义式"><a href="#定义式" class="headerlink" title="定义式"></a>定义式</h2><p>$$<br>f(l,v)=\frac{dL_{0}(v)}{dE(l)}<br>$$</p>
-<h2 id="非微分形式"><a href="#非微分形式" class="headerlink" title="非微分形式"></a>非微分形式</h2><p>仅限于非区域光源(点光源、方向光源)</p>
-<p>$$<br>f(l,v)=\frac{L_{0}(v)}{E(l)\overline{cos}\theta_{i}}<br>$$</p>
-<p>L(v)是视图矢量v方向上产生的出射辐照率(radiance)<br>E(l)是光源在垂直于光的方向向量L平面测得的辐照度(irradiance)</p>
-<h2 id="着色方程"><a href="#着色方程" class="headerlink" title="着色方程"></a>着色方程</h2><p>$$<br>L_{0}(v)=\sum_{k=1}^{n}f(l_{k},v)\bigotimes E_{L_{k}}cos\theta_{i_{k}}<br>$$</p>
-<p>k:光源索引</p>
-<h1 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h1><h2 id="经验模型"><a href="#经验模型" class="headerlink" title="经验模型"></a>经验模型</h2><ul>
-<li>Lambert漫反射模型</li>
-<li>Phong高光反射模型</li>
-<li>Blinn-Phong高光反射模型</li>
-<li>……</li>
-</ul>
-<h2 id="数据驱动模型"><a href="#数据驱动模型" class="headerlink" title="数据驱动模型"></a>数据驱动模型</h2><ul>
-<li><a href="http://www.merl.com/brdf/" target="_blank" rel="noopener">MERL BRDF Database</a></li>
-<li><a href="http://people.csail.mit.edu/addy/research/brdf/" target="_blank" rel="noopener">MIT CSAIL</a></li>
-<li><a href="http://www1.cs.columbia.edu/CAVE/databases/tvbrdf/about.php" target="_blank" rel="noopener">CAVE Database</a></li>
-<li>……</li>
-</ul>
-<h2 id="基于物理的模型"><a href="#基于物理的模型" class="headerlink" title="基于物理的模型"></a>基于物理的模型</h2><ul>
-<li>Cook-Torrance模型(各向同性BRDF模型)</li>
-<li>Ward模型(各向异性BRDF模型)</li>
-</ul>
-<h1 id="高光反射项-specular-term"><a href="#高光反射项-specular-term" class="headerlink" title="高光反射项(specular term)"></a>高光反射项(specular term)</h1><h2 id="微面元理论-microfacet-theory"><a href="#微面元理论-microfacet-theory" class="headerlink" title="微面元理论(microfacet theory)"></a>微面元理论(microfacet theory)</h2><p>微面元理论认为物体表面是由很多的微面元组成的，并且认为这些微面元是光学平滑的，有完美的高光反射。<br>不同的微面元会把同一入射方向的光反射到不同的方向上，即只有一部分微面元反射的光线进入摄像机，这部分微面元的法线m恰好为入射方向和观察方向的一半，即半角矢量h(half-angle vector)</p>
-<h2 id="Torrance-Sparrow-微面元模型"><a href="#Torrance-Sparrow-微面元模型" class="headerlink" title="Torrance-Sparrow 微面元模型"></a>Torrance-Sparrow 微面元模型</h2><p>$$<br>f_{spec}(l,v)=\frac{F(l,h)G(l,v,h)D(h)}{4(n\cdot l)(n\cdot v)}<br>$$</p>
-<h2 id="法线分布函数-normal-distribution-function-NDF"><a href="#法线分布函数-normal-distribution-function-NDF" class="headerlink" title="法线分布函数(normal distribution function, NDF)"></a>法线分布函数(normal distribution function, NDF)</h2><p>描述组成表面一点的所有微面元的法线分布概率，输入朝向h，返回朝向是h的微面元数占微面元总数的比例</p>
-<p>$$<br>h=\frac{\hat{l}+\hat{v}}{|\hat{l}+\hat{v}|}<br>$$</p>
-<h3 id="Phong模型"><a href="#Phong模型" class="headerlink" title="Phong模型"></a>Phong模型</h3><p>$$<br>D_{Phong}(h)=(v\cdot r)^{gloss}<br>$$</p>
-<p>$$<br>gloss:光泽度<br>$$</p>
-<p>$$<br>r=2(n\cdot l)n-l (反射方向)<br>$$</p>
-<h3 id="Blinn-Phong模型"><a href="#Blinn-Phong模型" class="headerlink" title="Blinn-Phong模型"></a>Blinn-Phong模型</h3><p>$$<br>D_{Blinn}(h)=(n\cdot h)^{gloss}<br>$$</p>
-<h3 id="Beckmann"><a href="#Beckmann" class="headerlink" title="Beckmann"></a>Beckmann</h3><p>$$<br>D_{Beckmann}(h)=\frac{1}{m^{2}cos^{4}\alpha}e^{-(\frac{tan\alpha}{m})^{2}}<br>$$</p>
-<h3 id="GGX"><a href="#GGX" class="headerlink" title="GGX"></a>GGX</h3><p>$$<br>D_{GGX}(h)=\frac{\alpha^{2}}{\pi((n\cdot h)^{2}(\alpha^{2}-1)+1)^{2}}<br>$$</p>
-<p>$$<br>\alpha=roughness^{2}<br>$$</p>
-<h2 id="阴影-遮罩函数-shadow-masking-function"><a href="#阴影-遮罩函数-shadow-masking-function" class="headerlink" title="阴影-遮罩函数(shadow-masking function)"></a>阴影-遮罩函数(shadow-masking function)</h2><h3 id="Smith-Schlick模型"><a href="#Smith-Schlick模型" class="headerlink" title="Smith-Schlick模型"></a>Smith-Schlick模型</h3><p>$$<br>G(l,v,h)=\frac{1}{[(n\cdot l)(1-k)+k][(n\cdot v)(1-k)+k]}<br>$$</p>
-<p>$$<br>k=\frac{roughness^{2}}{2}<br>$$</p>
-<h3 id="Kelemen模型"><a href="#Kelemen模型" class="headerlink" title="Kelemen模型"></a>Kelemen模型</h3><p>$$<br>G(l,v,h)=\frac{(n\cdot l)(n\cdot v)}{(v\cdot h)^2}<br>$$</p>
-<h2 id="菲涅尔反射函数-Fresnel-reflectance"><a href="#菲涅尔反射函数-Fresnel-reflectance" class="headerlink" title="菲涅尔反射函数(Fresnel reflectance)"></a>菲涅尔反射函数(Fresnel reflectance)</h2><h3 id="Schlick-菲涅尔近似等式"><a href="#Schlick-菲涅尔近似等式" class="headerlink" title="Schlick 菲涅尔近似等式"></a>Schlick 菲涅尔近似等式</h3><p>$$<br>F(l,h)=F_{0}+(1-F_{0})(1-l\cdot h)^{5}<br>$$</p>
-<p>$$<br>F_{0}:高光反射系数<br>$$</p>
-<h1 id="漫反射项-diffuse-term"><a href="#漫反射项-diffuse-term" class="headerlink" title="漫反射项(diffuse term)"></a>漫反射项(diffuse term)</h1><h2 id="Lambert模型"><a href="#Lambert模型" class="headerlink" title="Lambert模型"></a>Lambert模型</h2><p>$$<br>f_{Lambert}(l,v)=\frac{c_{diff}}{\pi}<br>$$</p>
-<h2 id="Disney的漫反射模型"><a href="#Disney的漫反射模型" class="headerlink" title="Disney的漫反射模型"></a>Disney的漫反射模型</h2><p>加入了近似的次表面散射</p>
-<p>$$<br>f_{diff}(l,v)=\frac{baseColor}{\pi}(1+(F_{D90}-1)(1-n\cdot l)^{5})(1+(F_{D90}-1)(1-n\cdot v)^5)<br>$$</p>
-<p>$$<br>F_{D90}=0.5+2roughness(h\cdot l)^{2}<br>$$</p>
-<h1 id="引申"><a href="#引申" class="headerlink" title="引申"></a>引申</h1><ul>
-<li>BSSRDF:Bidirectional Surface Scattering Reflectance Distribution Function，双向表面散反射分布函数</li>
-<li>SBRDF(SVBRDF):Spatial BRDF(Spatially Varying BRDF)，空间BRDF</li>
-<li>BTDF:Bidirectional Transmitance Distribution Function，双向透射分布函数</li>
-<li>BSDF:Bidirectional Scattering Distribution Function，双向散射分布函数</li>
-</ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
       
     </footer>
   </div>
@@ -519,10 +366,11 @@
   </article>
 
 
-    
-  </section>
 
-  
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -530,6 +378,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -550,8 +402,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -602,6 +463,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Cel-Shading"><span class="nav-number">1.</span> <span class="nav-text">Cel Shading</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#实现"><span class="nav-number">2.</span> <span class="nav-text">实现</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#References"><span class="nav-number">3.</span> <span class="nav-text">References</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -735,6 +612,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
