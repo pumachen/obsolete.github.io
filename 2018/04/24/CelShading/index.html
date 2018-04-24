@@ -87,12 +87,12 @@
 <meta property="og:description" content="Cel ShadingCel Shading(Toon Shading)是非真实感渲染中非常重要的一部分，用于模拟日本动画中的赛璐璐风格。这种风格的特点是没有渐变色，而是用明确的亮暗面分界来概括光照效果。 实现相对于逼真的物理渲染，人对于卡通渲染会更宽容一点，因此这里不需要进行环境光、镜面反射等复杂的光照计算。只需要用简单的漫反射+降低色阶就可以达到不错的效果。   ##《塞尔达传说：荒野之">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/2018/04/24/CelShading/Zelda_01.jpg">
-<meta property="og:image" content="http://yoursite.com/2018/04/24/CelShading/Zelda_Diffuse_Lambert.PNG">
-<meta property="og:image" content="http://yoursite.com/2018/04/24/CelShading/Zelda_Graded_Diffuse_Lambert.PNG">
-<meta property="og:image" content="http://yoursite.com/2018/04/24/CelShading/Zelda_Fresnel.PNG">
-<meta property="og:image" content="http://yoursite.com/2018/04/24/CelShading/Zelda_Graded_Fresnel.PNG">
-<meta property="og:image" content="http://yoursite.com/2018/04/24/CelShading/Zelda_Final.PNG">
-<meta property="og:updated_time" content="2018-04-24T13:09:02.632Z">
+<meta property="og:image" content="http://yoursite.com/2018/04/24/CelShading/Link_Diffuse_Lambert.PNG">
+<meta property="og:image" content="http://yoursite.com/2018/04/24/CelShading/Link_Graded_Diffuse_Lambert.PNG">
+<meta property="og:image" content="http://yoursite.com/2018/04/24/CelShading/Link_Fresnel.PNG">
+<meta property="og:image" content="http://yoursite.com/2018/04/24/CelShading/Link_Graded_Fresnel.PNG">
+<meta property="og:image" content="http://yoursite.com/2018/04/24/CelShading/Link_Final.PNG">
+<meta property="og:updated_time" content="2018-04-24T13:47:19.296Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CelShading">
 <meta name="twitter:description" content="Cel ShadingCel Shading(Toon Shading)是非真实感渲染中非常重要的一部分，用于模拟日本动画中的赛璐璐风格。这种风格的特点是没有渐变色，而是用明确的亮暗面分界来概括光照效果。 实现相对于逼真的物理渲染，人对于卡通渲染会更宽容一点，因此这里不需要进行环境光、镜面反射等复杂的光照计算。只需要用简单的漫反射+降低色阶就可以达到不错的效果。   ##《塞尔达传说：荒野之">
@@ -310,13 +310,13 @@
 
 <h1 id="Cel-Shading"><a href="#Cel-Shading" class="headerlink" title="Cel Shading"></a>Cel Shading</h1><p><em>Cel Shading</em>(<em>Toon Shading</em>)是非真实感渲染中非常重要的一部分，用于模拟日本动画中的赛璐璐风格。这种风格的特点是没有渐变色，而是用明确的亮暗面分界来概括光照效果。<br><img src="/2018/04/24/CelShading/Zelda_01.jpg" alt=""></p>
 <h1 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h1><p>相对于逼真的物理渲染，人对于卡通渲染会更宽容一点，因此这里不需要进行环境光、镜面反射等复杂的光照计算。只需要用简单的漫反射+降低色阶就可以达到不错的效果。</p>
-<p><img src="/2018/04/24/CelShading/Zelda_Diffuse_Lambert.PNG" alt="Lambert漫反射模型"> <img src="/2018/04/24/CelShading/Zelda_Graded_Diffuse_Lambert.PNG" alt="降色阶"></p>
+<p><img src="/2018/04/24/CelShading/Link_Diffuse_Lambert.PNG" alt="Lambert漫反射模型"> <img src="/2018/04/24/CelShading/Link_Graded_Diffuse_Lambert.PNG" alt="降色阶"></p>
 <p>##《塞尔达传说：荒野之息》的风格<br>《BOTW》在亮暗双色的基础上加入了第三层”高光”，这里的高光和BRDF里的specular不同，而是类似菲涅尔反射的光照效果。这层”高光”只存在于物体的边缘，即光照方向和观察方向几乎与法线垂直的情况，一般在布料和毛发上比较明显。Disney的BRDF模型[1]里也有对于这种效果的计算。</p>
 <p>这里用Schlick近似等式[2]来计算，然后同样把计算结果进行一次降低色阶的映射</p>
 <p>$$<br>F_{Schlick}(v,n)=F_{0}+(1-F_{0})(n\cdot v)^{5}<br>$$</p>
-<p><img src="/2018/04/24/CelShading/Zelda_Fresnel.PNG" alt="菲涅尔反射"> <img src="/2018/04/24/CelShading/Zelda_Graded_Fresnel.PNG" alt="降色阶"></p>
+<p><img src="/2018/04/24/CelShading/Link_Fresnel.PNG" alt="菲涅尔反射"> <img src="/2018/04/24/CelShading/Link_Graded_Fresnel.PNG" alt="降色阶"></p>
 <p>最终效果</p>
-<p><img src="/2018/04/24/CelShading/Zelda_Final.PNG" alt="最终效果"></p>
+<p><img src="/2018/04/24/CelShading/Link_Final.PNG" alt="最终效果"></p>
 <h1 id="References"><a href="#References" class="headerlink" title="References"></a>References</h1><p>[1]B Burley Physically-based shading at disney - 2012<br>[2]Schlick, C. (1994). “An Inexpensive BRDF Model for Physically-based Rendering”. Computer Graphics Forum. 13 (3): 233. doi:10.1111/1467-8659.1330233.</p>
 
       
