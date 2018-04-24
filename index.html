@@ -309,7 +309,7 @@
 <p><img src="/2018/04/24/CelShading/ToonShading.jpg"></p>
 <h1 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h1><p>一般的PBR模型经过简单的色调映射就可以实现Cel Shading的效果。相对于真实感渲染，玩家对于卡通渲染会更宽容一些，因此这里不需要完整的BRDF模型，环境光、次表面散射等复杂的光照计算都可以省略，一般只计算漫反射、高光反射和菲涅尔反射。</p>
 <p>只计算最简单的漫反射+色调映射就可以达到不错的效果。</p>
-<p><img src="/2018/04/24/CelShading/Link_Diffuse.PNG" style="zoom:50%"></p>
+<p><img src="/2018/04/24/CelShading/Link_Diffuse_Disney.PNG" style="zoom:50%"></p>
 <p>下面结合具体的案例来分析Cel Shading的实践应用</p>
 <h2 id="《塞尔达传说：荒野之息》"><a href="#《塞尔达传说：荒野之息》" class="headerlink" title="《塞尔达传说：荒野之息》"></a>《塞尔达传说：荒野之息》</h2><p>《BOTW》的美术风格很有意思，人物和环境是两个画风，人物是典型的Cel Shading，环境更接近油画的风格。制作人想让这个游戏看起来有日本动画片(Anime)的风格，又希望对于荒野的描绘有外光派(Plein-Air)的感觉。<em>（这两种画风放在一起竟然完全没有割裂感orz）</em></p>
 <p><img src="/2018/04/24/CelShading/Zelda_01.jpg"></p>
@@ -317,7 +317,7 @@
 <p>《BOTW》在亮暗双色的基础上加入了第三层光照，有点类似菲涅尔反射的效果，即用更亮的颜色来填充那些观察方向几乎与法线垂直的地方，这种效果一般在布料和毛发上比较明显。Disney的BRDF模型<sup>[1]</sup>里也有对于这种效果的计算。</p>
 <p>这里用Schlick近似等式<sup>[2]</sup>来计算，然后同样把计算结果进行一次色调映射</p>
 <p>$$<br>F_{Schlick}(\theta)=F_{0}+(1-F_{0})(cos\theta)^{5}<br>$$</p>
-<p><img src="/2018/04/24/CelShading/Link_Fresnel.PNG" style="zoom:50%"></p>
+<p><img src="/2018/04/24/CelShading/Link_Fresnel_Schlick.PNG" style="zoom:50%"></p>
 <p>最终效果</p>
 <p><img src="/2018/04/24/CelShading/Link_Final.PNG" style="zoom:50%"></p>
 <h1 id="References"><a href="#References" class="headerlink" title="References"></a>References</h1><p>[1]B Burley Physically-based shading at disney - 2012<br>[2]Schlick, C. (1994). “An Inexpensive BRDF Model for Physically-based Rendering”. </p>
