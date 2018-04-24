@@ -317,7 +317,7 @@
 <p>《BOTW》在亮暗双色的基础上加入了第三层光照，有点类似菲涅尔反射的效果，即用更亮的颜色来填充那些观察方向几乎与法线垂直的地方，这种效果一般在布料和毛发上比较明显。Disney的BRDF模型<sup>[1]</sup>里也有对于这种效果的计算。</p>
 <p>这里用Schlick近似等式<sup>[2]</sup>来计算，然后同样把计算结果进行一次色调映射</p>
 <p>$$<br>F_{Schlick}(\theta)=F_{0}+(1-F_{0})(cos\theta)^{5}<br>$$</p>
-<p><img src="/2018/04/24/CelShading/Link_Fresnel.png" style="zoom:50%"></p>
+<p><img src="/2018/04/24/CelShading/Link_Fresnel.PNG" style="zoom:50%"></p>
 <p>最终效果</p>
 <p><img src="/2018/04/24/CelShading/Link_Final.PNG" style="zoom:50%"></p>
 <h1 id="References"><a href="#References" class="headerlink" title="References"></a>References</h1><p>[1]B Burley Physically-based shading at disney - 2012<br>[2]Schlick, C. (1994). “An Inexpensive BRDF Model for Physically-based Rendering”. </p>
