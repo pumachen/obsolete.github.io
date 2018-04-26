@@ -263,7 +263,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-24T21:08:01+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-24T22:08:01+08:00">
                 2018-04-24
               </time>
             
@@ -305,10 +305,10 @@
           
             <script type="text/javascript" async src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML"> </script>
 
-<h1 id="Cel-Shading"><a href="#Cel-Shading" class="headerlink" title="Cel Shading"></a>Cel Shading</h1><p><em>Cel Shading(Toon Shading)</em>是非真实感渲染中非常重要的一部分，用于模拟日本动画中的赛璐璐(Celluloid)风格。这种风格的特点是没有渐变色，而是用明确的亮暗面分界来概括光照效果。</p>
+<h1 id="Cel-Shading"><a href="#Cel-Shading" class="headerlink" title="Cel Shading"></a>Cel Shading</h1><p>Cel Shading(Toon Shading)是非真实感渲染(Non-Photorealistic Rendering)中非常重要的一部分，用于模拟日本动画中的赛璐璐(Celluloid)风格。这种风格的特点是没有渐变色，而是用明确的亮暗面分界来概括光照效果。</p>
 <p><img src="/2018/04/24/CelShading/ToonShading.jpg"></p>
-<h1 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h1><p>一般的PBR模型经过简单的色调映射就可以实现Cel Shading的效果。相对于真实感渲染，玩家对于卡通渲染会更宽容一些，因此这里不需要完整的BRDF模型，环境光、次表面散射等复杂的光照计算都可以省略，一般只计算漫反射、高光反射和菲涅尔反射。</p>
-<p>只计算最简单的漫反射+色调映射就可以达到不错的效果。</p>
+<h1 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h1><p>一般的PBR模型经过简单的色调映射就可以实现Cel Shading的效果。相对于真实感渲染，玩家对于卡通渲染会更宽容一些，因此这里不需要完整的BRDF模型，一般只计算漫反射、高光反射和菲涅尔反射。</p>
+<p>只计算最简单的漫反射，再加上色调映射和轮廓线就可以得到不错的效果。</p>
 <p><img src="/2018/04/24/CelShading/Link_Diffuse_Disney.PNG" style="zoom:50%"></p>
 <p>下面结合具体的案例来分析Cel Shading的实践应用</p>
 <h2 id="《塞尔达传说：荒野之息》"><a href="#《塞尔达传说：荒野之息》" class="headerlink" title="《塞尔达传说：荒野之息》"></a>《塞尔达传说：荒野之息》</h2><p>《BOTW》的美术风格很有意思，人物和环境是两个画风，人物是典型的Cel Shading，环境更接近油画的风格。制作人想让这个游戏看起来有日本动画片(Anime)的风格，又希望对于荒野的描绘有外光派(Plein-Air)的感觉。<em>（这两种画风放在一起竟然完全没有割裂感orz）</em></p>
