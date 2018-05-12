@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="ComputerGraphics,PBR," />
 
 
 
@@ -79,23 +79,18 @@
 
 
 
-<meta name="description" content="Cel ShadingCel Shading(Toon Shading)是非真实感渲染(Non-Photorealistic Rendering)中非常重要的一部分，用于模拟日本动画中的赛璐璐(Celluloid)风格。这种风格的特点是没有渐变色，而是用明确的亮暗面分界来概括光照效果。  实现一般的PBR模型经过简单的色调映射就可以实现Cel Shading的效果。相对于真实感渲染，玩家对于">
+<meta name="description" content="Disney实现BRDF模型时遵循的原则 用更直观更容易理解的参数来代替物理参数  使用尽可能少的参数 参数在作用范围内应该被映射到[0,1]之间 在特殊情况下允许参数超出预设区间 在各种参数组合下保持健壮、合理  参数Disney的BRDF模型使用的参数如下  baseColor:表面的颜色，一般来自纹理贴图 subsurface:控制漫反射的结果(使用了近似的次表面散射) metalli">
+<meta name="keywords" content="ComputerGraphics,PBR">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Cel Shading">
-<meta property="og:url" content="http://yoursite.com/2018/04/24/CelShading/index.html">
+<meta property="og:title" content="Disney Principled BRDF">
+<meta property="og:url" content="http://yoursite.com/2018/05/12/Disney-principled-BRDF/index.html">
 <meta property="og:site_name" content="Game Dev Lab">
-<meta property="og:description" content="Cel ShadingCel Shading(Toon Shading)是非真实感渲染(Non-Photorealistic Rendering)中非常重要的一部分，用于模拟日本动画中的赛璐璐(Celluloid)风格。这种风格的特点是没有渐变色，而是用明确的亮暗面分界来概括光照效果。  实现一般的PBR模型经过简单的色调映射就可以实现Cel Shading的效果。相对于真实感渲染，玩家对于">
+<meta property="og:description" content="Disney实现BRDF模型时遵循的原则 用更直观更容易理解的参数来代替物理参数  使用尽可能少的参数 参数在作用范围内应该被映射到[0,1]之间 在特殊情况下允许参数超出预设区间 在各种参数组合下保持健壮、合理  参数Disney的BRDF模型使用的参数如下  baseColor:表面的颜色，一般来自纹理贴图 subsurface:控制漫反射的结果(使用了近似的次表面散射) metalli">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://yoursite.com/2018/04/24/CelShading/ToonShading.jpg">
-<meta property="og:image" content="http://yoursite.com/2018/04/24/CelShading/Link_Diffuse_Disney.PNG">
-<meta property="og:image" content="http://yoursite.com/2018/04/24/CelShading/Zelda_01.jpg">
-<meta property="og:image" content="http://yoursite.com/2018/04/24/CelShading/Link_Fresnel_Schlick.PNG">
-<meta property="og:image" content="http://yoursite.com/2018/04/24/CelShading/Link_Final.PNG">
-<meta property="og:updated_time" content="2018-05-12T07:47:17.683Z">
+<meta property="og:updated_time" content="2018-05-12T07:45:42.322Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Cel Shading">
-<meta name="twitter:description" content="Cel ShadingCel Shading(Toon Shading)是非真实感渲染(Non-Photorealistic Rendering)中非常重要的一部分，用于模拟日本动画中的赛璐璐(Celluloid)风格。这种风格的特点是没有渐变色，而是用明确的亮暗面分界来概括光照效果。  实现一般的PBR模型经过简单的色调映射就可以实现Cel Shading的效果。相对于真实感渲染，玩家对于">
-<meta name="twitter:image" content="http://yoursite.com/2018/04/24/CelShading/ToonShading.jpg">
+<meta name="twitter:title" content="Disney Principled BRDF">
+<meta name="twitter:description" content="Disney实现BRDF模型时遵循的原则 用更直观更容易理解的参数来代替物理参数  使用尽可能少的参数 参数在作用范围内应该被映射到[0,1]之间 在特殊情况下允许参数超出预设区间 在各种参数组合下保持健壮、合理  参数Disney的BRDF模型使用的参数如下  baseColor:表面的颜色，一般来自纹理贴图 subsurface:控制漫反射的结果(使用了近似的次表面散射) metalli">
 
 
 
@@ -125,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/04/24/CelShading/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/05/12/Disney-principled-BRDF/"/>
 
 
 
 
 
-  <title>Cel Shading | Game Dev Lab</title>
+  <title>Disney Principled BRDF | Game Dev Lab</title>
   
 
 
@@ -238,7 +233,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/24/CelShading/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/12/Disney-principled-BRDF/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Puma Chen">
@@ -255,7 +250,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Cel Shading</h1>
+          <h1 class="post-title" itemprop="name headline">Disney Principled BRDF</h1>
         
 
         <div class="post-meta">
@@ -267,8 +262,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-24T22:08:01+08:00">
-                2018-04-24
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-12T14:13:08+08:00">
+                2018-05-12
               </time>
             
 
@@ -307,21 +302,36 @@
       
         <script type="text/javascript" async src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML"> </script>
 
-<h1 id="Cel-Shading"><a href="#Cel-Shading" class="headerlink" title="Cel Shading"></a>Cel Shading</h1><p>Cel Shading(Toon Shading)是非真实感渲染(Non-Photorealistic Rendering)中非常重要的一部分，用于模拟日本动画中的赛璐璐(Celluloid)风格。这种风格的特点是没有渐变色，而是用明确的亮暗面分界来概括光照效果。</p>
-<p><img src="/2018/04/24/CelShading/ToonShading.jpg"></p>
-<h1 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h1><p>一般的PBR模型经过简单的色调映射就可以实现Cel Shading的效果。相对于真实感渲染，玩家对于卡通渲染会更宽容一些，因此这里不需要完整的BRDF模型，一般只计算漫反射和高光反射。</p>
-<p>只计算最简单的漫反射，再加上色调映射和轮廓线就可以得到不错的效果。</p>
-<p><img src="/2018/04/24/CelShading/Link_Diffuse_Disney.PNG" style="zoom:50%"></p>
-<p>下面结合具体的案例来分析Cel Shading的实践应用</p>
-<h2 id="《塞尔达传说：荒野之息》"><a href="#《塞尔达传说：荒野之息》" class="headerlink" title="《塞尔达传说：荒野之息》"></a>《塞尔达传说：荒野之息》</h2><p>《BOTW》的人物和环境是不同的美术风格，人物是典型的Cel Shading，环境更接近油画的风格。制作人想让这个游戏看起来有日本动画片(Anime)的风格，又希望对于荒野的描绘有外光派(Plein-Air)的感觉。</p>
-<p><img src="/2018/04/24/CelShading/Zelda_01.jpg"></p>
-<p>《BOTW》在漫反射的基础上加入了轮廓照明(Rim Lighting)，用一层更亮的颜色来表现掠射光。</p>
-<p>这里用Schlick近似等式<sup>[1]</sup>来计算，然后同样把计算结果进行一次色调映射</p>
-<p>$$<br>F_{Schlick}(\theta)=F_{0}+(1-F_{0})(cos\theta)^{5}<br>$$</p>
-<p><img src="/2018/04/24/CelShading/Link_Fresnel_Schlick.PNG" style="zoom:50%"></p>
-<p>最终效果</p>
-<p><img src="/2018/04/24/CelShading/Link_Final.PNG" style="zoom:50%"></p>
-<h1 id="References"><a href="#References" class="headerlink" title="References"></a>References</h1><p>[1]Schlick, C. (1994). “An Inexpensive BRDF Model for Physically-based Rendering”. </p>
+<h2 id="Disney实现BRDF模型时遵循的原则"><a href="#Disney实现BRDF模型时遵循的原则" class="headerlink" title="Disney实现BRDF模型时遵循的原则"></a>Disney实现BRDF模型时遵循的原则</h2><ul>
+<li>用更直观更容易理解的参数来代替物理参数 </li>
+<li>使用尽可能少的参数</li>
+<li>参数在作用范围内应该被映射到[0,1]之间</li>
+<li>在特殊情况下允许参数超出预设区间</li>
+<li>在各种参数组合下保持健壮、合理</li>
+</ul>
+<h2 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h2><p>Disney的BRDF模型使用的参数如下</p>
+<ul>
+<li>baseColor:表面的颜色，一般来自纹理贴图</li>
+<li>subsurface:控制漫反射的结果(使用了近似的次表面散射)</li>
+<li>metallic:金属度(0=非金属, 1=金属)，控制两种光照模型的线性混合。金属模型没有漫反射项，并且将镜面反射和表面颜色进行混合</li>
+<li>specular:高光反射强度</li>
+<li>specularTint:高光反射和表面颜色的混合系数</li>
+<li>roughness:表面粗糙度，同时影响漫反射和高光反射的结果</li>
+<li>anisotropic:各向异性程度 (0=各向同性, 1=各向异性)</li>
+<li>sheen:掠射光，一般用于布料</li>
+<li>sheenTint:掠射光与表面颜色的混合系数</li>
+<li>clearcoat:第二层镜面反射强度</li>
+<li>clearcoatGloss:第二层镜面反射光泽度</li>
+</ul>
+<h2 id="漫反射模型"><a href="#漫反射模型" class="headerlink" title="漫反射模型"></a>漫反射模型</h2><p>$$<br>f_{d}=\frac{baseColor}{\pi}(1+(F_{D90}-1)(1-cos\theta_{l})^{5})(1+(F_{D90}-1)(1-cos\theta_{v})^{5})<br>$$</p>
+<p>$$<br>F_{D90}=0.5+2\cdot roughness\cdot cos^{2}\theta_{d}<br>$$</p>
+<h2 id="高光反射模型"><a href="#高光反射模型" class="headerlink" title="高光反射模型"></a>高光反射模型</h2><p>Disney的BRDF模型计算了两层高光反射，可以模拟表面层次复杂的材质</p>
+<h3 id="法线分布函数"><a href="#法线分布函数" class="headerlink" title="法线分布函数"></a>法线分布函数</h3><p>GTR模型:</p>
+<p>$$<br>D_{GTR}=c/(\alpha^{2}cos^{2}\theta_{h}+sin^{2}\theta_{h})^{\gamma}<br>$$</p>
+<p>$$<br>\alpha :与粗糙度相关，把粗糙度的平方映射到\alpha参数上可以得到在视觉上更平滑的粗糙度变化<br>$$</p>
+<p>$$<br>\gamma :主要的高光反射层\gamma=2，次要高光反射层\gamma=1<br>$$</p>
+<h3 id="菲涅尔反射函数"><a href="#菲涅尔反射函数" class="headerlink" title="菲涅尔反射函数"></a>菲涅尔反射函数</h3><p>Schlick 近似等式:</p>
+<p>$$<br>F_{Schlick}=F0 + (1-F_{0})(1-cos\theta_{d})^{5}<br>$$</p>
 
       
     </div>
@@ -337,6 +347,14 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/ComputerGraphics/" rel="tag"># ComputerGraphics</a>
+          
+            <a href="/tags/PBR/" rel="tag"># PBR</a>
+          
+        </div>
+      
 
       
       
@@ -346,8 +364,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/04/15/BRDF/" rel="next" title="Bidirectional Reflectance Distribution Function">
-                <i class="fa fa-chevron-left"></i> Bidirectional Reflectance Distribution Function
+              <a href="/2018/04/24/CelShading/" rel="next" title="Cel Shading">
+                <i class="fa fa-chevron-left"></i> Cel Shading
               </a>
             
           </div>
@@ -355,10 +373,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/05/12/Disney-principled-BRDF/" rel="prev" title="Disney Principled BRDF">
-                Disney Principled BRDF <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -481,7 +495,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Cel-Shading"><span class="nav-number">1.</span> <span class="nav-text">Cel Shading</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#实现"><span class="nav-number">2.</span> <span class="nav-text">实现</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#《塞尔达传说：荒野之息》"><span class="nav-number">2.1.</span> <span class="nav-text">《塞尔达传说：荒野之息》</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#References"><span class="nav-number">3.</span> <span class="nav-text">References</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Disney实现BRDF模型时遵循的原则"><span class="nav-number">1.</span> <span class="nav-text">Disney实现BRDF模型时遵循的原则</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参数"><span class="nav-number">2.</span> <span class="nav-text">参数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#漫反射模型"><span class="nav-number">3.</span> <span class="nav-text">漫反射模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#高光反射模型"><span class="nav-number">4.</span> <span class="nav-text">高光反射模型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#法线分布函数"><span class="nav-number">4.1.</span> <span class="nav-text">法线分布函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#菲涅尔反射函数"><span class="nav-number">4.2.</span> <span class="nav-text">菲涅尔反射函数</span></a></li></ol></li></ol></div>
             
 
           </div>

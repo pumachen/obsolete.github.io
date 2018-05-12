@@ -232,6 +232,157 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/12/Disney-principled-BRDF/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Puma Chen">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Game Dev Lab">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/05/12/Disney-principled-BRDF/" itemprop="url">Disney Principled BRDF</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-12T14:13:08+08:00">
+                2018-05-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <script type="text/javascript" async src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML"> </script>
+
+<h2 id="Disney实现BRDF模型时遵循的原则"><a href="#Disney实现BRDF模型时遵循的原则" class="headerlink" title="Disney实现BRDF模型时遵循的原则"></a>Disney实现BRDF模型时遵循的原则</h2><ul>
+<li>用更直观更容易理解的参数来代替物理参数 </li>
+<li>使用尽可能少的参数</li>
+<li>参数在作用范围内应该被映射到[0,1]之间</li>
+<li>在特殊情况下允许参数超出预设区间</li>
+<li>在各种参数组合下保持健壮、合理</li>
+</ul>
+<h2 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h2><p>Disney的BRDF模型使用的参数如下</p>
+<ul>
+<li>baseColor:表面的颜色，一般来自纹理贴图</li>
+<li>subsurface:控制漫反射的结果(使用了近似的次表面散射)</li>
+<li>metallic:金属度(0=非金属, 1=金属)，控制两种光照模型的线性混合。金属模型没有漫反射项，并且将镜面反射和表面颜色进行混合</li>
+<li>specular:高光反射强度</li>
+<li>specularTint:高光反射和表面颜色的混合系数</li>
+<li>roughness:表面粗糙度，同时影响漫反射和高光反射的结果</li>
+<li>anisotropic:各向异性程度 (0=各向同性, 1=各向异性)</li>
+<li>sheen:掠射光，一般用于布料</li>
+<li>sheenTint:掠射光与表面颜色的混合系数</li>
+<li>clearcoat:第二层镜面反射强度</li>
+<li>clearcoatGloss:第二层镜面反射光泽度</li>
+</ul>
+<h2 id="漫反射模型"><a href="#漫反射模型" class="headerlink" title="漫反射模型"></a>漫反射模型</h2><p>$$<br>f_{d}=\frac{baseColor}{\pi}(1+(F_{D90}-1)(1-cos\theta_{l})^{5})(1+(F_{D90}-1)(1-cos\theta_{v})^{5})<br>$$</p>
+<p>$$<br>F_{D90}=0.5+2\cdot roughness\cdot cos^{2}\theta_{d}<br>$$</p>
+<h2 id="高光反射模型"><a href="#高光反射模型" class="headerlink" title="高光反射模型"></a>高光反射模型</h2><p>Disney的BRDF模型计算了两层高光反射，可以模拟表面层次复杂的材质</p>
+<h3 id="法线分布函数"><a href="#法线分布函数" class="headerlink" title="法线分布函数"></a>法线分布函数</h3><p>GTR模型:</p>
+<p>$$<br>D_{GTR}=c/(\alpha^{2}cos^{2}\theta_{h}+sin^{2}\theta_{h})^{\gamma}<br>$$</p>
+<p>$$<br>\alpha :与粗糙度相关，把粗糙度的平方映射到\alpha参数上可以得到在视觉上更平滑的粗糙度变化<br>$$</p>
+<p>$$<br>\gamma :主要的高光反射层\gamma=2，次要高光反射层\gamma=1<br>$$</p>
+<h3 id="菲涅尔反射函数"><a href="#菲涅尔反射函数" class="headerlink" title="菲涅尔反射函数"></a>菲涅尔反射函数</h3><p>Schlick 近似等式:</p>
+<p>$$<br>F_{Schlick}=F0 + (1-F_{0})(1-cos\theta_{d})^{5}<br>$$</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/24/CelShading/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -307,20 +458,19 @@
 
 <h1 id="Cel-Shading"><a href="#Cel-Shading" class="headerlink" title="Cel Shading"></a>Cel Shading</h1><p>Cel Shading(Toon Shading)是非真实感渲染(Non-Photorealistic Rendering)中非常重要的一部分，用于模拟日本动画中的赛璐璐(Celluloid)风格。这种风格的特点是没有渐变色，而是用明确的亮暗面分界来概括光照效果。</p>
 <p><img src="/2018/04/24/CelShading/ToonShading.jpg"></p>
-<h1 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h1><p>一般的PBR模型经过简单的色调映射就可以实现Cel Shading的效果。相对于真实感渲染，玩家对于卡通渲染会更宽容一些，因此这里不需要完整的BRDF模型，一般只计算漫反射、高光反射和菲涅尔反射。</p>
+<h1 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h1><p>一般的PBR模型经过简单的色调映射就可以实现Cel Shading的效果。相对于真实感渲染，玩家对于卡通渲染会更宽容一些，因此这里不需要完整的BRDF模型，一般只计算漫反射和高光反射。</p>
 <p>只计算最简单的漫反射，再加上色调映射和轮廓线就可以得到不错的效果。</p>
 <p><img src="/2018/04/24/CelShading/Link_Diffuse_Disney.PNG" style="zoom:50%"></p>
 <p>下面结合具体的案例来分析Cel Shading的实践应用</p>
-<h2 id="《塞尔达传说：荒野之息》"><a href="#《塞尔达传说：荒野之息》" class="headerlink" title="《塞尔达传说：荒野之息》"></a>《塞尔达传说：荒野之息》</h2><p>《BOTW》的美术风格很有意思，人物和环境是两个画风，人物是典型的Cel Shading，环境更接近油画的风格。制作人想让这个游戏看起来有日本动画片(Anime)的风格，又希望对于荒野的描绘有外光派(Plein-Air)的感觉。<em>（这两种画风放在一起竟然完全没有割裂感orz）</em></p>
+<h2 id="《塞尔达传说：荒野之息》"><a href="#《塞尔达传说：荒野之息》" class="headerlink" title="《塞尔达传说：荒野之息》"></a>《塞尔达传说：荒野之息》</h2><p>《BOTW》的人物和环境是不同的美术风格，人物是典型的Cel Shading，环境更接近油画的风格。制作人想让这个游戏看起来有日本动画片(Anime)的风格，又希望对于荒野的描绘有外光派(Plein-Air)的感觉。</p>
 <p><img src="/2018/04/24/CelShading/Zelda_01.jpg"></p>
-<p>环境部分的坑有空再开，这里主要分析人物的渲染。</p>
-<p>《BOTW》在亮暗双色的基础上加入了第三层光照，有点类似菲涅尔反射的效果，即用更亮的颜色来填充那些观察方向几乎与法线垂直的地方，这种效果一般在布料和毛发上比较明显。Disney的BRDF模型<sup>[1]</sup>里也有对于这种效果的计算。</p>
-<p>这里用Schlick近似等式<sup>[2]</sup>来计算，然后同样把计算结果进行一次色调映射</p>
+<p>《BOTW》在漫反射的基础上加入了轮廓照明(Rim Lighting)，用一层更亮的颜色来表现掠射光。</p>
+<p>这里用Schlick近似等式<sup>[1]</sup>来计算，然后同样把计算结果进行一次色调映射</p>
 <p>$$<br>F_{Schlick}(\theta)=F_{0}+(1-F_{0})(cos\theta)^{5}<br>$$</p>
 <p><img src="/2018/04/24/CelShading/Link_Fresnel_Schlick.PNG" style="zoom:50%"></p>
 <p>最终效果</p>
 <p><img src="/2018/04/24/CelShading/Link_Final.PNG" style="zoom:50%"></p>
-<h1 id="References"><a href="#References" class="headerlink" title="References"></a>References</h1><p>[1]B Burley Physically-based shading at disney - 2012<br>[2]Schlick, C. (1994). “An Inexpensive BRDF Model for Physically-based Rendering”. </p>
+<h1 id="References"><a href="#References" class="headerlink" title="References"></a>References</h1><p>[1]Schlick, C. (1994). “An Inexpensive BRDF Model for Physically-based Rendering”. </p>
 
           
         
@@ -469,20 +619,26 @@
 <h2 id="Torrance-Sparrow-微面元模型"><a href="#Torrance-Sparrow-微面元模型" class="headerlink" title="Torrance-Sparrow 微面元模型"></a>Torrance-Sparrow 微面元模型</h2><p>$$<br>f_{spec}(l,v)=\frac{F(l,h)G(l,v,h)D(h)}{4(n\cdot l)(n\cdot v)}<br>$$</p>
 <h2 id="法线分布函数-normal-distribution-function-NDF"><a href="#法线分布函数-normal-distribution-function-NDF" class="headerlink" title="法线分布函数(normal distribution function, NDF)"></a>法线分布函数(normal distribution function, NDF)</h2><p>描述组成表面一点的所有微面元的法线分布概率，输入朝向h，返回朝向是h的微面元数占微面元总数的比例</p>
 <p>$$<br>h=\frac{\hat{l}+\hat{v}}{|\hat{l}+\hat{v}|}<br>$$</p>
-<h3 id="Phong模型"><a href="#Phong模型" class="headerlink" title="Phong模型"></a>Phong模型</h3><p>$$<br>D_{Phong}(h)=(v\cdot r)^{gloss}<br>$$</p>
+<h3 id="Phong"><a href="#Phong" class="headerlink" title="Phong"></a>Phong</h3><p>$$<br>D_{Phong}(h)=(v\cdot r)^{gloss}<br>$$</p>
 <p>$$<br>gloss:光泽度<br>$$</p>
 <p>$$<br>r=2(n\cdot l)n-l (反射方向)<br>$$</p>
-<h3 id="Blinn-Phong模型"><a href="#Blinn-Phong模型" class="headerlink" title="Blinn-Phong模型"></a>Blinn-Phong模型</h3><p>$$<br>D_{Blinn}(h)=(n\cdot h)^{gloss}<br>$$</p>
-<h3 id="Beckmann"><a href="#Beckmann" class="headerlink" title="Beckmann"></a>Beckmann</h3><p>$$<br>D_{Beckmann}(h)=\frac{1}{m^{2}cos^{4}\alpha}e^{-(\frac{tan\alpha}{m})^{2}}<br>$$</p>
+<h3 id="Blinn-Phong"><a href="#Blinn-Phong" class="headerlink" title="Blinn-Phong"></a>Blinn-Phong</h3><p>$$<br>D_{Blinn}(h)=(n\cdot h)^{gloss}<br>$$</p>
+<h3 id="Normalized-Blinn-Phong"><a href="#Normalized-Blinn-Phong" class="headerlink" title="Normalized Blinn-Phong"></a>Normalized Blinn-Phong</h3><p>$$<br>D_{Blinn}(h)=\frac{(n\cdot h)^{gloss} \times (gloss+2)}{2\pi}<br>$$</p>
+<h3 id="Beckmann"><a href="#Beckmann" class="headerlink" title="Beckmann"></a>Beckmann</h3><p>$$<br>D_{Beckmann}(h)=\frac{e^{-(\frac{tan\alpha}{m})^{2}}}{\pi m^{2}cos^{4}\alpha}<br>$$</p>
+<p>$$<br>\alpha = arccos(n\cdot h)<br>$$</p>
 <h3 id="GGX"><a href="#GGX" class="headerlink" title="GGX"></a>GGX</h3><p>$$<br>D_{GGX}(h)=\frac{\alpha^{2}}{\pi((n\cdot h)^{2}(\alpha^{2}-1)+1)^{2}}<br>$$</p>
 <p>$$<br>\alpha=roughness^{2}<br>$$</p>
 <h2 id="阴影-遮罩函数-shadow-masking-function"><a href="#阴影-遮罩函数-shadow-masking-function" class="headerlink" title="阴影-遮罩函数(shadow-masking function)"></a>阴影-遮罩函数(shadow-masking function)</h2><h3 id="Smith-Schlick模型"><a href="#Smith-Schlick模型" class="headerlink" title="Smith-Schlick模型"></a>Smith-Schlick模型</h3><p>$$<br>G(l,v,h)=\frac{1}{[(n\cdot l)(1-k)+k][(n\cdot v)(1-k)+k]}<br>$$</p>
 <p>$$<br>k=\frac{roughness^{2}}{2}<br>$$</p>
+<p>$$<br>k_{Beckmann}=roughness \times \sqrt{\frac{2}{\pi}}<br>$$</p>
 <h3 id="Kelemen模型"><a href="#Kelemen模型" class="headerlink" title="Kelemen模型"></a>Kelemen模型</h3><p>$$<br>G(l,v,h)=\frac{(n\cdot l)(n\cdot v)}{(v\cdot h)^2}<br>$$</p>
+<h3 id="SmithJoint模型"><a href="#SmithJoint模型" class="headerlink" title="SmithJoint模型"></a>SmithJoint模型</h3><p>$$<br>G(l,v,h)=\frac{0.5}{\Lambda_{v} + \Lambda_{l}}<br>$$</p>
+<p>$$<br>\Lambda_{v}=(n\cdot v)\sqrt{(n\cdot l)^{2}(1-roughness^{2}) + roughness^{2}}<br>$$</p>
+<p>$$<br>\Lambda_{l}=(n\cdot l)\sqrt{(n\cdot v)^{2}(1-roughness^{2}) + roughness^{2}}<br>$$</p>
 <h2 id="菲涅尔反射函数-Fresnel-reflectance"><a href="#菲涅尔反射函数-Fresnel-reflectance" class="headerlink" title="菲涅尔反射函数(Fresnel reflectance)"></a>菲涅尔反射函数(Fresnel reflectance)</h2><h3 id="Schlick-菲涅尔近似等式"><a href="#Schlick-菲涅尔近似等式" class="headerlink" title="Schlick 菲涅尔近似等式"></a>Schlick 菲涅尔近似等式</h3><p>$$<br>F(l,h)=F_{0}+(1-F_{0})(1-l\cdot h)^{5}<br>$$</p>
 <p>$$<br>F_{0}:高光反射系数<br>$$</p>
 <h1 id="漫反射项-diffuse-term"><a href="#漫反射项-diffuse-term" class="headerlink" title="漫反射项(diffuse term)"></a>漫反射项(diffuse term)</h1><h2 id="Lambert模型"><a href="#Lambert模型" class="headerlink" title="Lambert模型"></a>Lambert模型</h2><p>$$<br>f_{Lambert}(l,v)=\frac{c_{diff}}{\pi}<br>$$</p>
-<h2 id="Disney的漫反射模型"><a href="#Disney的漫反射模型" class="headerlink" title="Disney的漫反射模型"></a>Disney的漫反射模型</h2><p>加入了近似的次表面散射</p>
+<h2 id="Disney的漫反射项"><a href="#Disney的漫反射项" class="headerlink" title="Disney的漫反射项"></a>Disney的漫反射项</h2><p>通过让光线照到更多原来照不到的区域来粗略的模拟次表面散射的效果</p>
 <p>$$<br>f_{diff}(l,v)=\frac{baseColor}{\pi}(1+(F_{D90}-1)(1-n\cdot l)^{5})(1+(F_{D90}-1)(1-n\cdot v)^5)<br>$$</p>
 <p>$$<br>F_{D90}=0.5+2roughness(h\cdot l)^{2}<br>$$</p>
 <h1 id="引申"><a href="#引申" class="headerlink" title="引申"></a>引申</h1><ul>
@@ -572,7 +728,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-count">3</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
