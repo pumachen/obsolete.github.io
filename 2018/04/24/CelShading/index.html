@@ -91,7 +91,7 @@
 <meta property="og:image" content="http://yoursite.com/2018/04/24/CelShading/Zelda_01.jpg">
 <meta property="og:image" content="http://yoursite.com/2018/04/24/CelShading/Link_Fresnel_Schlick.PNG">
 <meta property="og:image" content="http://yoursite.com/2018/04/24/CelShading/Link_Final.PNG">
-<meta property="og:updated_time" content="2018-05-12T07:47:17.683Z">
+<meta property="og:updated_time" content="2018-05-20T11:43:57.822Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Cel Shading">
 <meta name="twitter:description" content="Cel ShadingCel Shading(Toon Shading)是非真实感渲染(Non-Photorealistic Rendering)中非常重要的一部分，用于模拟日本动画中的赛璐璐(Celluloid)风格。这种风格的特点是没有渐变色，而是用明确的亮暗面分界来概括光照效果。  实现一般的PBR模型经过简单的色调映射就可以实现Cel Shading的效果。相对于真实感渲染，玩家对于">
@@ -309,8 +309,7 @@
 
 <h1 id="Cel-Shading"><a href="#Cel-Shading" class="headerlink" title="Cel Shading"></a>Cel Shading</h1><p>Cel Shading(Toon Shading)是非真实感渲染(Non-Photorealistic Rendering)中非常重要的一部分，用于模拟日本动画中的赛璐璐(Celluloid)风格。这种风格的特点是没有渐变色，而是用明确的亮暗面分界来概括光照效果。</p>
 <p><img src="/2018/04/24/CelShading/ToonShading.jpg"></p>
-<h1 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h1><p>一般的PBR模型经过简单的色调映射就可以实现Cel Shading的效果。相对于真实感渲染，玩家对于卡通渲染会更宽容一些，因此这里不需要完整的BRDF模型，一般只计算漫反射和高光反射。</p>
-<p>只计算最简单的漫反射，再加上色调映射和轮廓线就可以得到不错的效果。</p>
+<h1 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h1><p>一般的PBR模型经过简单的色调映射就可以实现Cel Shading的效果。相对于真实感渲染，玩家对于卡通渲染会更宽容一些，因此这里不需要完整的BRDF模型，一般只计算漫反射和高光反射，配合色调映射(Tone Mapping)和轮廓线渲染(Silhouette Rendering)就可以得到不错的效果。</p>
 <p><img src="/2018/04/24/CelShading/Link_Diffuse_Disney.PNG" style="zoom:50%"></p>
 <p>下面结合具体的案例来分析Cel Shading的实践应用</p>
 <h2 id="《塞尔达传说：荒野之息》"><a href="#《塞尔达传说：荒野之息》" class="headerlink" title="《塞尔达传说：荒野之息》"></a>《塞尔达传说：荒野之息》</h2><p>《BOTW》的人物和环境是不同的美术风格，人物是典型的Cel Shading，环境更接近油画的风格。制作人想让这个游戏看起来有日本动画片(Anime)的风格，又希望对于荒野的描绘有外光派(Plein-Air)的感觉。</p>
@@ -435,7 +434,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">4</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

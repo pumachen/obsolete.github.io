@@ -232,6 +232,152 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/20/Silhouette-Edge-Rendering/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Puma Chen">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Game Dev Lab">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/05/20/Silhouette-Edge-Rendering/" itemprop="url">Silhouette Edge Rendering</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-20T19:54:16+08:00">
+                2018-05-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="Silhouette-Edge-Rendering"><a href="#Silhouette-Edge-Rendering" class="headerlink" title="Silhouette Edge Rendering"></a>Silhouette Edge Rendering</h1><p>轮廓线渲染，一般用于卡通渲染或用于标识指定的物体。常用的渲染轮廓线的方法有以下几种</p>
+<ul>
+<li>Surface Angle Silhouetting</li>
+<li>Procedural Geometry Silhouetting</li>
+<li>Image Process Silhouetting</li>
+</ul>
+<h2 id="Surface-Angle-Silhouetting"><a href="#Surface-Angle-Silhouetting" class="headerlink" title="Surface Angle Silhouetting"></a>Surface Angle Silhouetting</h2><p>根据表面的法线和观察方向的夹角来检测轮廓线，二者越接近垂直则说明越靠近轮廓线，即表面法线和观察方向的点积接近0时，将该处渲染为轮廓线。</p>
+<p>这种方法的优势是速度快，可以在一个Pass里得到结果。但是对模型有比较高的要求，对于面数较低的模型渲染的效果比较糟糕。如下图左边是原始模型，右边是经过曲面细分的模型，差别还是比较大的。(感觉右边还有点水墨画的意思？)</p>
+<p><img src="/2018/05/20/Silhouette-Edge-Rendering/SurfaceAngle.gif"></p>
+<h2 id="Procedural-Geometry-Silhouetting"><a href="#Procedural-Geometry-Silhouetting" class="headerlink" title="Procedural Geometry Silhouetting"></a>Procedural Geometry Silhouetting</h2><p>用两个Pass，第一个Pass正常渲染正向表面，第二个Pass剔除正面，只渲染背面，通过一些特殊的方法来渲染背面来使轮廓线可见</p>
+<p>渲染背面的几种方法</p>
+<ul>
+<li>Edge Drawing</li>
+<li>Z-bias</li>
+<li>Triangle Fattening</li>
+<li>Shell/Halo Method</li>
+</ul>
+<h3 id="Edge-Drawing"><a href="#Edge-Drawing" class="headerlink" title="Edge Drawing"></a>Edge Drawing</h3><p>以线段图元（而不是三角图元）来渲染背面，再通过偏置来使轮廓线可见</p>
+<p>（这个坑等学完geometry shader再回来填 orz）</p>
+<h3 id="Z-bias"><a href="#Z-bias" class="headerlink" title="Z-bias"></a>Z-bias</h3><p>将背面渲染为纯黑色，再沿观察方向偏置，使背面部分可见</p>
+<p><img src="/2018/05/20/Silhouette-Edge-Rendering/Z-bias.PNG"></p>
+<p>使用这种方法的问题是，如果使用统一的偏置量会导致部分比较薄的地方会被背面完全遮挡（比如下图的兔耳朵），可以考虑把局部偏置量烘焙到顶点信息里，但这样要调整轮廓线的效果就非常麻烦了</p>
+<p><img src="/2018/05/20/Silhouette-Edge-Rendering/Z-bias.gif"></p>
+<h3 id="Triangle-Fattening"><a href="#Triangle-Fattening" class="headerlink" title="Triangle Fattening"></a>Triangle Fattening</h3><p>待填坑</p>
+<h3 id="Shell-Halo-Method"><a href="#Shell-Halo-Method" class="headerlink" title="Shell/Halo Method"></a>Shell/Halo Method</h3><p>将背面顶点沿其法线方向偏移，让背面像”壳”一样包围正面，为了防止背面遮挡正面，需要关闭背面的深度写入。</p>
+<p>和Surface Angle silhouetting一样，这种方法对模型的面数也有要求，但效果明显要好得多。</p>
+<h2 id="Image-Process-Silhouetting"><a href="#Image-Process-Silhouetting" class="headerlink" title="Image Process Silhouetting"></a>Image Process Silhouetting</h2><p>待填坑</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/12/Disney-principled-BRDF/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -458,8 +604,7 @@
 
 <h1 id="Cel-Shading"><a href="#Cel-Shading" class="headerlink" title="Cel Shading"></a>Cel Shading</h1><p>Cel Shading(Toon Shading)是非真实感渲染(Non-Photorealistic Rendering)中非常重要的一部分，用于模拟日本动画中的赛璐璐(Celluloid)风格。这种风格的特点是没有渐变色，而是用明确的亮暗面分界来概括光照效果。</p>
 <p><img src="/2018/04/24/CelShading/ToonShading.jpg"></p>
-<h1 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h1><p>一般的PBR模型经过简单的色调映射就可以实现Cel Shading的效果。相对于真实感渲染，玩家对于卡通渲染会更宽容一些，因此这里不需要完整的BRDF模型，一般只计算漫反射和高光反射。</p>
-<p>只计算最简单的漫反射，再加上色调映射和轮廓线就可以得到不错的效果。</p>
+<h1 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h1><p>一般的PBR模型经过简单的色调映射就可以实现Cel Shading的效果。相对于真实感渲染，玩家对于卡通渲染会更宽容一些，因此这里不需要完整的BRDF模型，一般只计算漫反射和高光反射，配合色调映射(Tone Mapping)和轮廓线渲染(Silhouette Rendering)就可以得到不错的效果。</p>
 <p><img src="/2018/04/24/CelShading/Link_Diffuse_Disney.PNG" style="zoom:50%"></p>
 <p>下面结合具体的案例来分析Cel Shading的实践应用</p>
 <h2 id="《塞尔达传说：荒野之息》"><a href="#《塞尔达传说：荒野之息》" class="headerlink" title="《塞尔达传说：荒野之息》"></a>《塞尔达传说：荒野之息》</h2><p>《BOTW》的人物和环境是不同的美术风格，人物是典型的Cel Shading，环境更接近油画的风格。制作人想让这个游戏看起来有日本动画片(Anime)的风格，又希望对于荒野的描绘有外光派(Plein-Air)的感觉。</p>
@@ -728,7 +873,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">4</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

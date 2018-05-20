@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Silhouette Edge Rendering轮廓线渲染，一般用于卡通渲染或用于标识指定的物体。常用的渲染轮廓线的方法有以下几种  Surface Angle Silhouetting Procedural Geometry Silhouetting Image Process Silhouetting  Surface Angle Silhouetting根据表面的法线和观察方向的夹角来检测">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Silhouette Edge Rendering">
+<meta property="og:url" content="http://yoursite.com/2018/05/20/Silhouette-Edge-Rendering/index.html">
+<meta property="og:site_name" content="Game Dev Lab">
+<meta property="og:description" content="Silhouette Edge Rendering轮廓线渲染，一般用于卡通渲染或用于标识指定的物体。常用的渲染轮廓线的方法有以下几种  Surface Angle Silhouetting Procedural Geometry Silhouetting Image Process Silhouetting  Surface Angle Silhouetting根据表面的法线和观察方向的夹角来检测">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2018/05/20/Silhouette-Edge-Rendering/SurfaceAngle.gif">
+<meta property="og:image" content="http://yoursite.com/2018/05/20/Silhouette-Edge-Rendering/Z-bias.PNG">
+<meta property="og:image" content="http://yoursite.com/2018/05/20/Silhouette-Edge-Rendering/Z-bias.gif">
+<meta property="og:updated_time" content="2018-05-20T11:59:41.922Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Silhouette Edge Rendering">
+<meta name="twitter:description" content="Silhouette Edge Rendering轮廓线渲染，一般用于卡通渲染或用于标识指定的物体。常用的渲染轮廓线的方法有以下几种  Surface Angle Silhouetting Procedural Geometry Silhouetting Image Process Silhouetting  Surface Angle Silhouetting根据表面的法线和观察方向的夹角来检测">
+<meta name="twitter:image" content="http://yoursite.com/2018/05/20/Silhouette-Edge-Rendering/SurfaceAngle.gif">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/05/20/Silhouette-Edge-Rendering/"/>
+
+
+
+
+
+  <title>Silhouette Edge Rendering | Game Dev Lab</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Game Dev Lab</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">techniques about game develop and computer graphics</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/20/Silhouette-Edge-Rendering/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Puma Chen">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Game Dev Lab">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Silhouette Edge Rendering</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-20T19:54:16+08:00">
+                2018-05-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="Silhouette-Edge-Rendering"><a href="#Silhouette-Edge-Rendering" class="headerlink" title="Silhouette Edge Rendering"></a>Silhouette Edge Rendering</h1><p>轮廓线渲染，一般用于卡通渲染或用于标识指定的物体。常用的渲染轮廓线的方法有以下几种</p>
+<ul>
+<li>Surface Angle Silhouetting</li>
+<li>Procedural Geometry Silhouetting</li>
+<li>Image Process Silhouetting</li>
+</ul>
+<h2 id="Surface-Angle-Silhouetting"><a href="#Surface-Angle-Silhouetting" class="headerlink" title="Surface Angle Silhouetting"></a>Surface Angle Silhouetting</h2><p>根据表面的法线和观察方向的夹角来检测轮廓线，二者越接近垂直则说明越靠近轮廓线，即表面法线和观察方向的点积接近0时，将该处渲染为轮廓线。</p>
+<p>这种方法的优势是速度快，可以在一个Pass里得到结果。但是对模型有比较高的要求，对于面数较低的模型渲染的效果比较糟糕。如下图左边是原始模型，右边是经过曲面细分的模型，差别还是比较大的。(感觉右边还有点水墨画的意思？)</p>
+<p><img src="/2018/05/20/Silhouette-Edge-Rendering/SurfaceAngle.gif"></p>
+<h2 id="Procedural-Geometry-Silhouetting"><a href="#Procedural-Geometry-Silhouetting" class="headerlink" title="Procedural Geometry Silhouetting"></a>Procedural Geometry Silhouetting</h2><p>用两个Pass，第一个Pass正常渲染正向表面，第二个Pass剔除正面，只渲染背面，通过一些特殊的方法来渲染背面来使轮廓线可见</p>
+<p>渲染背面的几种方法</p>
+<ul>
+<li>Edge Drawing</li>
+<li>Z-bias</li>
+<li>Triangle Fattening</li>
+<li>Shell/Halo Method</li>
+</ul>
+<h3 id="Edge-Drawing"><a href="#Edge-Drawing" class="headerlink" title="Edge Drawing"></a>Edge Drawing</h3><p>以线段图元（而不是三角图元）来渲染背面，再通过偏置来使轮廓线可见</p>
+<p>（这个坑等学完geometry shader再回来填 orz）</p>
+<h3 id="Z-bias"><a href="#Z-bias" class="headerlink" title="Z-bias"></a>Z-bias</h3><p>将背面渲染为纯黑色，再沿观察方向偏置，使背面部分可见</p>
+<p><img src="/2018/05/20/Silhouette-Edge-Rendering/Z-bias.PNG"></p>
+<p>使用这种方法的问题是，如果使用统一的偏置量会导致部分比较薄的地方会被背面完全遮挡（比如下图的兔耳朵），可以考虑把局部偏置量烘焙到顶点信息里，但这样要调整轮廓线的效果就非常麻烦了</p>
+<p><img src="/2018/05/20/Silhouette-Edge-Rendering/Z-bias.gif"></p>
+<h3 id="Triangle-Fattening"><a href="#Triangle-Fattening" class="headerlink" title="Triangle Fattening"></a>Triangle Fattening</h3><p>待填坑</p>
+<h3 id="Shell-Halo-Method"><a href="#Shell-Halo-Method" class="headerlink" title="Shell/Halo Method"></a>Shell/Halo Method</h3><p>将背面顶点沿其法线方向偏移，让背面像”壳”一样包围正面，为了防止背面遮挡正面，需要关闭背面的深度写入。</p>
+<p>和Surface Angle silhouetting一样，这种方法对模型的面数也有要求，但效果明显要好得多。</p>
+<h2 id="Image-Process-Silhouetting"><a href="#Image-Process-Silhouetting" class="headerlink" title="Image Process Silhouetting"></a>Image Process Silhouetting</h2><p>待填坑</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/05/12/Disney-principled-BRDF/" rel="next" title="Disney Principled BRDF">
+                <i class="fa fa-chevron-left"></i> Disney Principled BRDF
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Puma Chen</p>
+              <p class="site-description motion-element" itemprop="description">techniques about game develop and computer graphics</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Silhouette-Edge-Rendering"><span class="nav-number">1.</span> <span class="nav-text">Silhouette Edge Rendering</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Surface-Angle-Silhouetting"><span class="nav-number">1.1.</span> <span class="nav-text">Surface Angle Silhouetting</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Procedural-Geometry-Silhouetting"><span class="nav-number">1.2.</span> <span class="nav-text">Procedural Geometry Silhouetting</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Edge-Drawing"><span class="nav-number">1.2.1.</span> <span class="nav-text">Edge Drawing</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Z-bias"><span class="nav-number">1.2.2.</span> <span class="nav-text">Z-bias</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Triangle-Fattening"><span class="nav-number">1.2.3.</span> <span class="nav-text">Triangle Fattening</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Shell-Halo-Method"><span class="nav-number">1.2.4.</span> <span class="nav-text">Shell/Halo Method</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Image-Process-Silhouetting"><span class="nav-number">1.3.</span> <span class="nav-text">Image Process Silhouetting</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Puma Chen</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
