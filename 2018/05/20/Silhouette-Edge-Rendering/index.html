@@ -89,7 +89,9 @@
 <meta property="og:image" content="http://yoursite.com/2018/05/20/Silhouette-Edge-Rendering/SurfaceAngle.gif">
 <meta property="og:image" content="http://yoursite.com/2018/05/20/Silhouette-Edge-Rendering/Z-bias.PNG">
 <meta property="og:image" content="http://yoursite.com/2018/05/20/Silhouette-Edge-Rendering/Z-bias.gif">
-<meta property="og:updated_time" content="2018-05-20T11:59:41.922Z">
+<meta property="og:image" content="http://yoursite.com/2018/05/20/Silhouette-Edge-Rendering/ImageProcessSilhouetting.PNG">
+<meta property="og:image" content="http://yoursite.com/2018/05/20/Silhouette-Edge-Rendering/ImageProcessSilhouetting.gif">
+<meta property="og:updated_time" content="2018-05-20T14:22:09.284Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Silhouette Edge Rendering">
 <meta name="twitter:description" content="Silhouette Edge Rendering轮廓线渲染，一般用于卡通渲染或用于标识指定的物体。常用的渲染轮廓线的方法有以下几种  Surface Angle Silhouetting Procedural Geometry Silhouetting Image Process Silhouetting  Surface Angle Silhouetting根据表面的法线和观察方向的夹角来检测">
@@ -328,8 +330,11 @@
 <p><img src="/2018/05/20/Silhouette-Edge-Rendering/Z-bias.gif"></p>
 <h3 id="Triangle-Fattening"><a href="#Triangle-Fattening" class="headerlink" title="Triangle Fattening"></a>Triangle Fattening</h3><p>待填坑</p>
 <h3 id="Shell-Halo-Method"><a href="#Shell-Halo-Method" class="headerlink" title="Shell/Halo Method"></a>Shell/Halo Method</h3><p>将背面顶点沿其法线方向偏移，让背面像”壳”一样包围正面，为了防止背面遮挡正面，需要关闭背面的深度写入。</p>
-<p>和Surface Angle silhouetting一样，这种方法对模型的面数也有要求，但效果明显要好得多。</p>
-<h2 id="Image-Process-Silhouetting"><a href="#Image-Process-Silhouetting" class="headerlink" title="Image Process Silhouetting"></a>Image Process Silhouetting</h2><p>待填坑</p>
+<p>和Surface Angle silhouetting一样，这种方法对模型的面数也有要求，但相对效果要好得多。</p>
+<h2 id="Image-Process-Silhouetting"><a href="#Image-Process-Silhouetting" class="headerlink" title="Image Process Silhouetting"></a>Image Process Silhouetting</h2><p>基于图像处理的轮廓线渲染，根据深度法线纹理(Depth Normal Texture)检测边缘</p>
+<p>如下图(b)为根据深度纹理(a)检测到的边缘，(d)为根据法线纹理(c)检测到的边缘，两者结合可以得到比较完整的边缘信息(e)</p>
+<p><img src="/2018/05/20/Silhouette-Edge-Rendering/ImageProcessSilhouetting.PNG"></p>
+<p><img src="/2018/05/20/Silhouette-Edge-Rendering/ImageProcessSilhouetting.gif"></p>
 
       
     </div>
