@@ -232,6 +232,198 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/01/Geometry-Shader/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Puma Chen">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Game Dev Lab">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/06/01/Geometry-Shader/" itemprop="url">Geometry Shader</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-01T18:59:14+08:00">
+                2018-06-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="Geometry-Shader"><a href="#Geometry-Shader" class="headerlink" title="Geometry Shader"></a>Geometry Shader</h1><h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><p>几何着色器(Geometry Shader)在渲染流水线中处于顶点着色器(Vertex Shader)和片元着色器(Fragment Shader)之间，是可选的着色器。</p>
+<p>几何着色器可以修改送入片元着色器的图元类型，或者添加、删除图元。</p>
+<p>几何着色器的优势是可以获取相邻图元之间的关系，这在高度并行的VS和FS中是没法实现的，借助这个优势可以实现很多特殊的效果。</p>
+<h2 id="Inputs"><a href="#Inputs" class="headerlink" title="Inputs"></a>Inputs</h2><table>
+<thead>
+<tr>
+<th style="text-align:center">input</th>
+<th style="text-align:center">vertex count</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">point</td>
+<td style="text-align:center">1</td>
+<td>点</td>
+</tr>
+<tr>
+<td style="text-align:center">line</td>
+<td style="text-align:center">2</td>
+<td>线段</td>
+</tr>
+<tr>
+<td style="text-align:center">lineadj</td>
+<td style="text-align:center">4</td>
+<td>邻接线段</td>
+</tr>
+<tr>
+<td style="text-align:center">triangle</td>
+<td style="text-align:center">3</td>
+<td>三角形</td>
+</tr>
+<tr>
+<td style="text-align:center">triangleadj</td>
+<td style="text-align:center">6</td>
+<td>邻接三角形</td>
+</tr>
+</tbody>
+</table>
+<h3 id="lineadj"><a href="#lineadj" class="headerlink" title="lineadj"></a>lineadj</h3><p>邻接线段</p>
+<p><img src="/2018/06/01/Geometry-Shader/line_adj.jpg"></p>
+<h3 id="triangleadj"><a href="#triangleadj" class="headerlink" title="triangleadj"></a>triangleadj</h3><p>邻接三角形(貌似unity不支持？？)</p>
+<p><img src="/2018/06/01/Geometry-Shader/triangle_adj.jpg"></p>
+<h2 id="Outputs"><a href="#Outputs" class="headerlink" title="Outputs"></a>Outputs</h2><table>
+<thead>
+<tr>
+<th style="text-align:center">output</th>
+<th style="text-align:center">vertex count</th>
+<th style="text-align:center">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">PointStream</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">点图元</td>
+</tr>
+<tr>
+<td style="text-align:center">LineStream</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center">线段图元</td>
+</tr>
+<tr>
+<td style="text-align:center">TriangleStream</td>
+<td style="text-align:center">3</td>
+<td style="text-align:center">三角图元</td>
+</tr>
+</tbody>
+</table>
+<h2 id="Practice"><a href="#Practice" class="headerlink" title="Practice"></a>Practice</h2><h3 id="Debug"><a href="#Debug" class="headerlink" title="Debug"></a>Debug</h3><p>可以把需要Debug的向量转化成线段图元输出，能更加直观的观察向量的方向</p>
+<p><img src="/2018/06/01/Geometry-Shader/DebugNormal.PNG"></p>
+<h3 id="Wireframe"><a href="#Wireframe" class="headerlink" title="Wireframe"></a>Wireframe</h3><p>将三角形按线框输出，便于观察模型网格</p>
+<p><img src="/2018/06/01/Geometry-Shader/WireFrame.PNG"></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/20/Silhouette-Edge-Rendering/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -877,7 +1069,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-count">5</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

@@ -79,24 +79,22 @@
 
 
 
-<meta name="description" content="Silhouette Edge Rendering轮廓线渲染，一般用于卡通渲染或用于标识指定的物体。常用的渲染轮廓线的方法有以下几种  Surface Angle Silhouetting Procedural Geometry Silhouetting Image Process Silhouetting  Surface Angle Silhouetting根据表面的法线和观察方向的夹角来检测">
+<meta name="description" content="Geometry ShaderAbstract几何着色器(Geometry Shader)在渲染流水线中处于顶点着色器(Vertex Shader)和片元着色器(Fragment Shader)之间，是可选的着色器。 几何着色器可以修改送入片元着色器的图元类型，或者添加、删除图元。 几何着色器的优势是可以获取相邻图元之间的关系，这在高度并行的VS和FS中是没法实现的，借助这个优势可以实现很多特殊的">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Silhouette Edge Rendering">
-<meta property="og:url" content="http://yoursite.com/2018/05/20/Silhouette-Edge-Rendering/index.html">
+<meta property="og:title" content="Geometry Shader">
+<meta property="og:url" content="http://yoursite.com/2018/06/01/Geometry-Shader/index.html">
 <meta property="og:site_name" content="Game Dev Lab">
-<meta property="og:description" content="Silhouette Edge Rendering轮廓线渲染，一般用于卡通渲染或用于标识指定的物体。常用的渲染轮廓线的方法有以下几种  Surface Angle Silhouetting Procedural Geometry Silhouetting Image Process Silhouetting  Surface Angle Silhouetting根据表面的法线和观察方向的夹角来检测">
+<meta property="og:description" content="Geometry ShaderAbstract几何着色器(Geometry Shader)在渲染流水线中处于顶点着色器(Vertex Shader)和片元着色器(Fragment Shader)之间，是可选的着色器。 几何着色器可以修改送入片元着色器的图元类型，或者添加、删除图元。 几何着色器的优势是可以获取相邻图元之间的关系，这在高度并行的VS和FS中是没法实现的，借助这个优势可以实现很多特殊的">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://yoursite.com/2018/05/20/Silhouette-Edge-Rendering/SurfaceAngle.gif">
-<meta property="og:image" content="http://yoursite.com/2018/05/20/Silhouette-Edge-Rendering/Z-bias.PNG">
-<meta property="og:image" content="http://yoursite.com/2018/05/20/Silhouette-Edge-Rendering/Z-bias.gif">
-<meta property="og:image" content="http://yoursite.com/2018/05/20/Silhouette-Edge-Rendering/ShellMethod.gif">
-<meta property="og:image" content="http://yoursite.com/2018/05/20/Silhouette-Edge-Rendering/ImageProcessSilhouetting.PNG">
-<meta property="og:image" content="http://yoursite.com/2018/05/20/Silhouette-Edge-Rendering/ImageProcessSilhouetting.gif">
-<meta property="og:updated_time" content="2018-05-22T11:18:49.027Z">
+<meta property="og:image" content="http://yoursite.com/2018/06/01/Geometry-Shader/line_adj.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/06/01/Geometry-Shader/triangle_adj.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/06/01/Geometry-Shader/DebugNormal.PNG">
+<meta property="og:image" content="http://yoursite.com/2018/06/01/Geometry-Shader/WireFrame.PNG">
+<meta property="og:updated_time" content="2018-05-30T01:18:28.208Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Silhouette Edge Rendering">
-<meta name="twitter:description" content="Silhouette Edge Rendering轮廓线渲染，一般用于卡通渲染或用于标识指定的物体。常用的渲染轮廓线的方法有以下几种  Surface Angle Silhouetting Procedural Geometry Silhouetting Image Process Silhouetting  Surface Angle Silhouetting根据表面的法线和观察方向的夹角来检测">
-<meta name="twitter:image" content="http://yoursite.com/2018/05/20/Silhouette-Edge-Rendering/SurfaceAngle.gif">
+<meta name="twitter:title" content="Geometry Shader">
+<meta name="twitter:description" content="Geometry ShaderAbstract几何着色器(Geometry Shader)在渲染流水线中处于顶点着色器(Vertex Shader)和片元着色器(Fragment Shader)之间，是可选的着色器。 几何着色器可以修改送入片元着色器的图元类型，或者添加、删除图元。 几何着色器的优势是可以获取相邻图元之间的关系，这在高度并行的VS和FS中是没法实现的，借助这个优势可以实现很多特殊的">
+<meta name="twitter:image" content="http://yoursite.com/2018/06/01/Geometry-Shader/line_adj.jpg">
 
 
 
@@ -126,13 +124,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/05/20/Silhouette-Edge-Rendering/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/06/01/Geometry-Shader/"/>
 
 
 
 
 
-  <title>Silhouette Edge Rendering | Game Dev Lab</title>
+  <title>Geometry Shader | Game Dev Lab</title>
   
 
 
@@ -239,7 +237,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/20/Silhouette-Edge-Rendering/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/01/Geometry-Shader/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Puma Chen">
@@ -256,7 +254,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Silhouette Edge Rendering</h1>
+          <h1 class="post-title" itemprop="name headline">Geometry Shader</h1>
         
 
         <div class="post-meta">
@@ -268,8 +266,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-20T19:54:16+08:00">
-                2018-05-20
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-01T18:59:14+08:00">
+                2018-06-01
               </time>
             
 
@@ -306,37 +304,79 @@
       
 
       
-        <h1 id="Silhouette-Edge-Rendering"><a href="#Silhouette-Edge-Rendering" class="headerlink" title="Silhouette Edge Rendering"></a>Silhouette Edge Rendering</h1><p>轮廓线渲染，一般用于卡通渲染或用于标识指定的物体。常用的渲染轮廓线的方法有以下几种</p>
-<ul>
-<li>Surface Angle Silhouetting</li>
-<li>Procedural Geometry Silhouetting</li>
-<li>Image Process Silhouetting</li>
-</ul>
-<h2 id="Surface-Angle-Silhouetting"><a href="#Surface-Angle-Silhouetting" class="headerlink" title="Surface Angle Silhouetting"></a>Surface Angle Silhouetting</h2><p>根据表面的法线和观察方向的夹角来检测轮廓线，二者越接近垂直则说明越靠近轮廓线，即表面法线和观察方向的点积接近0时，将该处渲染为轮廓线。</p>
-<p>这种方法的优势是速度快，可以在一个Pass里得到结果。但是对模型有比较高的要求，对于面数较低的模型渲染的效果比较糟糕。如下图左边是原始模型，右边是经过曲面细分的模型，差别还是比较大的。(感觉右边还有点水墨画的意思？)</p>
-<p><img src="/2018/05/20/Silhouette-Edge-Rendering/SurfaceAngle.gif"></p>
-<h2 id="Procedural-Geometry-Silhouetting"><a href="#Procedural-Geometry-Silhouetting" class="headerlink" title="Procedural Geometry Silhouetting"></a>Procedural Geometry Silhouetting</h2><p>用两个Pass，第一个Pass正常渲染正向表面，第二个Pass剔除正面，只渲染背面，通过一些特殊的方法来渲染背面来使轮廓线可见</p>
-<p>渲染背面的几种方法</p>
-<ul>
-<li>Edge Drawing</li>
-<li>Z-bias</li>
-<li>Triangle Fattening</li>
-<li>Shell/Halo Method</li>
-</ul>
-<h3 id="Edge-Drawing"><a href="#Edge-Drawing" class="headerlink" title="Edge Drawing"></a>Edge Drawing</h3><p>以线段图元（而不是三角图元）来渲染背面，再通过偏置来使轮廓线可见</p>
-<p>（这个坑等学完geometry shader再回来填 orz）</p>
-<h3 id="Z-bias"><a href="#Z-bias" class="headerlink" title="Z-bias"></a>Z-bias</h3><p>将背面渲染为纯黑色，再沿观察方向偏置，使背面部分可见</p>
-<p><img src="/2018/05/20/Silhouette-Edge-Rendering/Z-bias.PNG"></p>
-<p>使用这种方法的问题是，如果使用统一的偏置量会导致部分比较薄的地方会被背面完全遮挡（比如下图的兔耳朵），可以考虑把局部偏置量烘焙到顶点信息里，但这样要调整轮廓线的效果就非常麻烦了</p>
-<p><img src="/2018/05/20/Silhouette-Edge-Rendering/Z-bias.gif"></p>
-<h3 id="Triangle-Fattening"><a href="#Triangle-Fattening" class="headerlink" title="Triangle Fattening"></a>Triangle Fattening</h3><p>待填坑</p>
-<h3 id="Shell-Halo-Method"><a href="#Shell-Halo-Method" class="headerlink" title="Shell/Halo Method"></a>Shell/Halo Method</h3><p>将背面顶点沿其法线方向偏移，让背面像”壳”一样包围正面，为了防止背面遮挡正面，需要关闭背面的深度写入。</p>
-<p><img src="/2018/05/20/Silhouette-Edge-Rendering/ShellMethod.gif"></p>
-<p>和Surface Angle silhouetting一样，这种方法对模型的面数也有要求，但效果相对要好得多。</p>
-<h2 id="Image-Process-Silhouetting"><a href="#Image-Process-Silhouetting" class="headerlink" title="Image Process Silhouetting"></a>Image Process Silhouetting</h2><p>基于图像处理的轮廓线渲染，根据深度法线纹理(Depth Normal Texture)检测边缘</p>
-<p>如下图(b)为根据深度纹理(a)检测到的边缘，(d)为根据法线纹理(c)检测到的边缘，两者结合可以得到比较完整的边缘信息(e)</p>
-<p><img src="/2018/05/20/Silhouette-Edge-Rendering/ImageProcessSilhouetting.PNG"></p>
-<p><img src="/2018/05/20/Silhouette-Edge-Rendering/ImageProcessSilhouetting.gif"></p>
+        <h1 id="Geometry-Shader"><a href="#Geometry-Shader" class="headerlink" title="Geometry Shader"></a>Geometry Shader</h1><h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><p>几何着色器(Geometry Shader)在渲染流水线中处于顶点着色器(Vertex Shader)和片元着色器(Fragment Shader)之间，是可选的着色器。</p>
+<p>几何着色器可以修改送入片元着色器的图元类型，或者添加、删除图元。</p>
+<p>几何着色器的优势是可以获取相邻图元之间的关系，这在高度并行的VS和FS中是没法实现的，借助这个优势可以实现很多特殊的效果。</p>
+<h2 id="Inputs"><a href="#Inputs" class="headerlink" title="Inputs"></a>Inputs</h2><table>
+<thead>
+<tr>
+<th style="text-align:center">input</th>
+<th style="text-align:center">vertex count</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">point</td>
+<td style="text-align:center">1</td>
+<td>点</td>
+</tr>
+<tr>
+<td style="text-align:center">line</td>
+<td style="text-align:center">2</td>
+<td>线段</td>
+</tr>
+<tr>
+<td style="text-align:center">lineadj</td>
+<td style="text-align:center">4</td>
+<td>邻接线段</td>
+</tr>
+<tr>
+<td style="text-align:center">triangle</td>
+<td style="text-align:center">3</td>
+<td>三角形</td>
+</tr>
+<tr>
+<td style="text-align:center">triangleadj</td>
+<td style="text-align:center">6</td>
+<td>邻接三角形</td>
+</tr>
+</tbody>
+</table>
+<h3 id="lineadj"><a href="#lineadj" class="headerlink" title="lineadj"></a>lineadj</h3><p>邻接线段</p>
+<p><img src="/2018/06/01/Geometry-Shader/line_adj.jpg"></p>
+<h3 id="triangleadj"><a href="#triangleadj" class="headerlink" title="triangleadj"></a>triangleadj</h3><p>邻接三角形(貌似unity不支持？？)</p>
+<p><img src="/2018/06/01/Geometry-Shader/triangle_adj.jpg"></p>
+<h2 id="Outputs"><a href="#Outputs" class="headerlink" title="Outputs"></a>Outputs</h2><table>
+<thead>
+<tr>
+<th style="text-align:center">output</th>
+<th style="text-align:center">vertex count</th>
+<th style="text-align:center">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">PointStream</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">点图元</td>
+</tr>
+<tr>
+<td style="text-align:center">LineStream</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center">线段图元</td>
+</tr>
+<tr>
+<td style="text-align:center">TriangleStream</td>
+<td style="text-align:center">3</td>
+<td style="text-align:center">三角图元</td>
+</tr>
+</tbody>
+</table>
+<h2 id="Practice"><a href="#Practice" class="headerlink" title="Practice"></a>Practice</h2><h3 id="Debug"><a href="#Debug" class="headerlink" title="Debug"></a>Debug</h3><p>可以把需要Debug的向量转化成线段图元输出，能更加直观的观察向量的方向</p>
+<p><img src="/2018/06/01/Geometry-Shader/DebugNormal.PNG"></p>
+<h3 id="Wireframe"><a href="#Wireframe" class="headerlink" title="Wireframe"></a>Wireframe</h3><p>将三角形按线框输出，便于观察模型网格</p>
+<p><img src="/2018/06/01/Geometry-Shader/WireFrame.PNG"></p>
 
       
     </div>
@@ -361,8 +401,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/05/12/Disney-principled-BRDF/" rel="next" title="Disney Principled BRDF">
-                <i class="fa fa-chevron-left"></i> Disney Principled BRDF
+              <a href="/2018/05/20/Silhouette-Edge-Rendering/" rel="next" title="Silhouette Edge Rendering">
+                <i class="fa fa-chevron-left"></i> Silhouette Edge Rendering
               </a>
             
           </div>
@@ -370,10 +410,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/06/01/Geometry-Shader/" rel="prev" title="Geometry Shader">
-                Geometry Shader <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -496,7 +532,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Silhouette-Edge-Rendering"><span class="nav-number">1.</span> <span class="nav-text">Silhouette Edge Rendering</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Surface-Angle-Silhouetting"><span class="nav-number">1.1.</span> <span class="nav-text">Surface Angle Silhouetting</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Procedural-Geometry-Silhouetting"><span class="nav-number">1.2.</span> <span class="nav-text">Procedural Geometry Silhouetting</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Edge-Drawing"><span class="nav-number">1.2.1.</span> <span class="nav-text">Edge Drawing</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Z-bias"><span class="nav-number">1.2.2.</span> <span class="nav-text">Z-bias</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Triangle-Fattening"><span class="nav-number">1.2.3.</span> <span class="nav-text">Triangle Fattening</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Shell-Halo-Method"><span class="nav-number">1.2.4.</span> <span class="nav-text">Shell/Halo Method</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Image-Process-Silhouetting"><span class="nav-number">1.3.</span> <span class="nav-text">Image Process Silhouetting</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Geometry-Shader"><span class="nav-number">1.</span> <span class="nav-text">Geometry Shader</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Abstract"><span class="nav-number">1.1.</span> <span class="nav-text">Abstract</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Inputs"><span class="nav-number">1.2.</span> <span class="nav-text">Inputs</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#lineadj"><span class="nav-number">1.2.1.</span> <span class="nav-text">lineadj</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#triangleadj"><span class="nav-number">1.2.2.</span> <span class="nav-text">triangleadj</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Outputs"><span class="nav-number">1.3.</span> <span class="nav-text">Outputs</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Practice"><span class="nav-number">1.4.</span> <span class="nav-text">Practice</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Debug"><span class="nav-number">1.4.1.</span> <span class="nav-text">Debug</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Wireframe"><span class="nav-number">1.4.2.</span> <span class="nav-text">Wireframe</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
